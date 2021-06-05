@@ -1,7 +1,8 @@
-package dev.yunzai.milibrary
+package dev.yunzai.milibrary.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import dev.yunzai.milibrary.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
