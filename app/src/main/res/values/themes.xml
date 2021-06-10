@@ -11,4 +11,11 @@
         <item name="colorSurface">@color/white</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>
+
+    <style name="Theme.MiliBrary.NoActionBar" parent="Theme.MiliBrary">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="actionBarTheme">@null</item>
+    </style>
+
 </resources>
