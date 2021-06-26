@@ -5,10 +5,7 @@ import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.base.viewmodel.ViewModelBase
 import dev.yunzai.milibrary.data.UserRepository
 import dev.yunzai.milibrary.data.model.toErrorResponse
-import dev.yunzai.milibrary.util.SingleLiveEvent
-import dev.yunzai.milibrary.util.handleProgress
-import dev.yunzai.milibrary.util.toSha256
-import dev.yunzai.milibrary.util.withThread
+import dev.yunzai.milibrary.util.*
 import io.reactivex.rxjava3.kotlin.addTo
 
 class SignUpViewModel(
@@ -21,6 +18,11 @@ class SignUpViewModel(
     fun signUp(id: String, password: String, passwordCheck: String) {
         if (id.isNullOrEmpty() || password.isNullOrEmpty() || passwordCheck.isNullOrEmpty()) {
             errorMessage.value = R.string.signup_input_all_form_error
+            return
+        }
+
+        if(!password.isPasswordValid()){
+            errorMessage.value = R.string.password_format_error
             return
         }
 

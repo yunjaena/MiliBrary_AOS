@@ -82,6 +82,4 @@ class MainActivity : ViewBindingActivity<ActivityMainBinding>() {
             currentFragment = fragment
         }
     }
-
-
 }

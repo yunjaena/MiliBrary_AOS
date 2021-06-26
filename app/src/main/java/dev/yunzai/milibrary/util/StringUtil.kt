@@ -17,7 +17,7 @@ fun String.toSha256(): String {
 }
 
 private fun bytesToHex(byteArray: ByteArray): String {
-    val digits = "0123456789ABCDEF"
+    val digits = "0123456789abcdef"
     val hexChars = CharArray(byteArray.size * 2)
     for (i in byteArray.indices) {
         val v = byteArray[i].toInt() and 0xff

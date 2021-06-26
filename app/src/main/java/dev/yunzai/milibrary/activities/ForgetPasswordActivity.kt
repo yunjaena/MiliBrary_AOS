@@ -5,6 +5,7 @@ import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.base.activity.ViewBindingActivity
 import dev.yunzai.milibrary.base.showAlertDialog
 import dev.yunzai.milibrary.databinding.ActivityForgetPasswordBinding
+import dev.yunzai.milibrary.util.setOnSingleClickListener
 import dev.yunzai.milibrary.viewmodels.ForgetPasswordViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
