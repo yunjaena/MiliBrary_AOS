@@ -1,8 +1,10 @@
 package dev.yunzai.milibrary.activities
 
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.base.activity.ViewBindingActivity
+import dev.yunzai.milibrary.base.hideKeyBoard
 import dev.yunzai.milibrary.base.showAlertDialog
 import dev.yunzai.milibrary.databinding.ActivityResendEmailBinding
 import dev.yunzai.milibrary.util.setOnSingleClickListener
@@ -25,8 +27,17 @@ class ResendEmailActivity : ViewBindingActivity<ActivityResendEmailBinding>() {
 
     private fun initView() {
         binding.resendPassword.setOnSingleClickListener {
-            val id = binding.userIdEditText.text.toString().trim()
-            resendEmailViewModel.resendEmail(id)
+            sendEmail()
+        }
+
+        binding.userIdEditText.setOnEditorActionListener { _, actionId, _ ->
+            when(actionId){
+                EditorInfo.IME_ACTION_DONE -> {
+                    hideKeyBoard()
+                    sendEmail()
+                }
+            }
+            return@setOnEditorActionListener true
         }
     }
 
@@ -57,5 +68,10 @@ class ResendEmailActivity : ViewBindingActivity<ActivityResendEmailBinding>() {
                 }
             }
         }
+    }
+
+    private fun sendEmail(){
+        val id = binding.userIdEditText.text.toString().trim()
+        resendEmailViewModel.resendEmail(id)
     }
 }

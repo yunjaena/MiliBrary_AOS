@@ -69,3 +69,9 @@ fun Activity.showStatusBar() {
         window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 }
+
+fun Activity.hideKeyBoard(){
+    window.setSoftInputMode(
+        WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+    );
+}

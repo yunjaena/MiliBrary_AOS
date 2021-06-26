@@ -2,8 +2,10 @@ package dev.yunzai.milibrary.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.base.activity.ViewBindingActivity
+import dev.yunzai.milibrary.base.hideKeyBoard
 import dev.yunzai.milibrary.base.showAlertDialog
 import dev.yunzai.milibrary.databinding.ActivityLoginBinding
 import dev.yunzai.milibrary.util.setOnSingleClickListener
@@ -26,9 +28,7 @@ class LoginActivity : ViewBindingActivity<ActivityLoginBinding>() {
 
     private fun initView() {
         binding.login.setOnSingleClickListener {
-            val id = binding.userIdEditText.text.toString().trim()
-            val password = binding.passwordEditText.text.toString().trim()
-            loginViewModel.signIn(id, password)
+            signIn()
         }
 
         binding.signUpButton.setOnSingleClickListener {
@@ -49,7 +49,23 @@ class LoginActivity : ViewBindingActivity<ActivityLoginBinding>() {
             }
         }
 
+        binding.passwordEditText.setOnEditorActionListener { _, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    hideKeyBoard()
+                    signIn()
+                }
+            }
+            return@setOnEditorActionListener true
+        }
+
         useDefaultLoading(loginViewModel)
+    }
+
+    private fun signIn() {
+        val id = binding.userIdEditText.text.toString().trim()
+        val password = binding.passwordEditText.text.toString().trim()
+        loginViewModel.signIn(id, password)
     }
 
     private fun initObserver() {

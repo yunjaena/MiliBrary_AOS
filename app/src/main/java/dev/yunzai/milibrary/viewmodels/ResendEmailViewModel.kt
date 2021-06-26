@@ -18,7 +18,7 @@ class ResendEmailViewModel(
     val resendEmailSuccessEvent = SingleLiveEvent<String>()
 
     fun resendEmail(id: String) {
-        if(id.isNullOrEmpty()){
+        if (id.isNullOrEmpty()) {
             errorMessage.value = R.string.id_empty_error
             return
         }
@@ -26,17 +26,20 @@ class ResendEmailViewModel(
         userRepository.resendEmail(id)
             .handleProgress(this)
             .withThread()
-            .subscribe({
-                resendEmailSuccessEvent.call()
-            },{
-                val response = it.toErrorResponse()
-                if (response.isNullOrEmpty()) {
-                    errorMessage.value = R.string.login_fail_error
-                    return@subscribe
+            .subscribe(
+                {
+                    resendEmailSuccessEvent.call()
+                },
+                {
+                    val response = it.toErrorResponse()
+                    if (response.isNullOrEmpty()) {
+                        errorMessage.value = R.string.login_fail_error
+                        return@subscribe
+                    }
+                    response.forEach { message ->
+                        errorMessageFromServerEvent.value = message
+                    }
                 }
-                response.forEach { message ->
-                    errorMessageFromServerEvent.value = message
-                }
-            }).addTo(compositeDisposable)
+            ).addTo(compositeDisposable)
     }
 }

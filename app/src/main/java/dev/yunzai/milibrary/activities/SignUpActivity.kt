@@ -1,8 +1,10 @@
 package dev.yunzai.milibrary.activities
 
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.base.activity.ViewBindingActivity
+import dev.yunzai.milibrary.base.hideKeyBoard
 import dev.yunzai.milibrary.base.showAlertDialog
 import dev.yunzai.milibrary.databinding.ActivitySignupBinding
 import dev.yunzai.milibrary.util.getEmojiFilter
@@ -30,10 +32,17 @@ class SignUpActivity : ViewBindingActivity<ActivitySignupBinding>() {
         binding.passwordCheckEditText.filters = arrayOf(getEmojiFilter())
 
         binding.signUp.setOnSingleClickListener {
-            val id = binding.userIdEditText.text.toString().trim()
-            val password = binding.passwordEditText.text.toString().trim()
-            val passwordCheck = binding.passwordCheckEditText.text.toString().trim()
-            signUpViewModel.signUp(id, password, passwordCheck)
+            signUp()
+        }
+
+        binding.passwordCheckEditText.setOnEditorActionListener { v, actionId, event ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    hideKeyBoard()
+                    signUp()
+                }
+            }
+            return@setOnEditorActionListener true
         }
 
         useDefaultLoading(signUpViewModel)
@@ -66,5 +75,12 @@ class SignUpActivity : ViewBindingActivity<ActivitySignupBinding>() {
                 }
             }
         }
+    }
+
+    private fun signUp() {
+        val id = binding.userIdEditText.text.toString().trim()
+        val password = binding.passwordEditText.text.toString().trim()
+        val passwordCheck = binding.passwordCheckEditText.text.toString().trim()
+        signUpViewModel.signUp(id, password, passwordCheck)
     }
 }
