@@ -26,7 +26,9 @@ class SplashActivity : ViewBindingActivity<ActivitySplashBinding>() {
     }
 
     private fun goToLoginActivity() {
-        startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
-        finish()
+        Intent(this@SplashActivity, LoginActivity::class.java).run {
+            startActivity(this)
+            finish()
+        }
     }
 }

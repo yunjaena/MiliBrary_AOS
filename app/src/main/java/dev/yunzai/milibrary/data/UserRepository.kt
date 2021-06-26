@@ -54,4 +54,12 @@ class UserRepository(
     override fun saveUserInfo(id: String, nickName: String): Completable {
         return userLocalDataSource.saveUserInfo(id, nickName)
     }
+
+    override fun findPassword(id: String): Completable {
+        return userRemoteDataSource.findPassword(id)
+    }
+
+    override fun resendEmail(id: String): Completable {
+        return userRemoteDataSource.resendEmail(id)
+    }
 }

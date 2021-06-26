@@ -47,4 +47,12 @@ class UserRemoteDataSource(
     override fun saveUserInfo(id: String, nickName: String): Completable {
         return Completable.never()
     }
+
+    override fun findPassword(id: String): Completable {
+        return noAuthApi.findPassword(User(id))
+    }
+
+    override fun resendEmail(id: String): Completable {
+        return noAuthApi.resendEmail(User(id))
+    }
 }

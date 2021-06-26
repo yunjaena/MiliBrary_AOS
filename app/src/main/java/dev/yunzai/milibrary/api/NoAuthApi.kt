@@ -18,4 +18,10 @@ interface NoAuthApi {
 
     @POST("/api/user/signin")
     fun signIn(@Body user: User): Single<SignInResponse>
+
+    @POST("/api/user/forgot-password")
+    fun findPassword(@Body user: User): Completable
+
+    @POST("/api/user/signup/resend-email")
+    fun resendEmail(@Body user: User): Completable
 }

@@ -37,6 +37,18 @@ class LoginActivity : ViewBindingActivity<ActivityLoginBinding>() {
             }
         }
 
+        binding.findPassword.setOnSingleClickListener {
+            Intent(this@LoginActivity, ForgetPasswordActivity::class.java).run {
+                startActivity(this)
+            }
+        }
+
+        binding.resendEmail.setOnSingleClickListener {
+            Intent(this@LoginActivity, ResendEmailActivity::class.java).run {
+                startActivity(this)
+            }
+        }
+
         useDefaultLoading(loginViewModel)
     }
 

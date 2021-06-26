@@ -23,4 +23,8 @@ interface UserDataSource {
     fun signIn(id: String, password: String): Completable
 
     fun saveUserInfo(id: String, nickName: String): Completable
+
+    fun findPassword(id: String): Completable
+
+    fun resendEmail(id: String): Completable
 }

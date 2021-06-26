@@ -29,4 +29,11 @@
     <string name="ok">확인</string>
     <string name="login_fill_all_form_error">모든 항목을 입력해주세요.</string>
     <string name="login_fail_error">로그인에 실패했습니다.</string>
+    <string name="id_empty_error">아이디를 입력해주세요.</string>
+    <string name="find_password_fail_error">비밀번호 찾기에 실패했습니다.</string>
+    <string name="find_password_success">비밀번호 변경 메일이 발송되었습니다.\나라사랑포털 메일함을 확인해주세요.</string>
+
+    <string name="resend_email_under_line"><u>인증 메일 재전송</u></string>
+    <string name="resend_email">인증 메일 재전송</string>
+    <string name="resend_email_success">회원가입 인증 메일이 재전송되었습니다.\나라사랑포털 메일함을 확인해주세요.</string>
 </resources>

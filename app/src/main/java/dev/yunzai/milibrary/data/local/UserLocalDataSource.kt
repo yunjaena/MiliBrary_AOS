@@ -6,7 +6,6 @@ import dev.yunzai.milibrary.constant.REFRESH_TOKEN
 import dev.yunzai.milibrary.constant.USER_ID
 import dev.yunzai.milibrary.constant.USER_NICKNAME
 import dev.yunzai.milibrary.data.UserDataSource
-import dev.yunzai.milibrary.data.model.AccessToken
 import dev.yunzai.milibrary.data.model.JwtResponse
 import dev.yunzai.milibrary.data.model.SignInResponse
 import io.reactivex.rxjava3.core.Completable
@@ -18,10 +17,10 @@ class UserLocalDataSource : UserDataSource {
     }
 
     override fun saveToken(accessToken: String, refreshToken: String): Completable {
-        return  Completable.create {
-            if(!accessToken.isNullOrEmpty())
+        return Completable.create {
+            if (!accessToken.isNullOrEmpty())
                 Hawk.put(ACCESS_TOKEN, accessToken)
-            if(!refreshToken.isNullOrEmpty())
+            if (!refreshToken.isNullOrEmpty())
                 Hawk.put(REFRESH_TOKEN, refreshToken)
             it.onComplete()
         }
@@ -57,5 +56,13 @@ class UserLocalDataSource : UserDataSource {
             Hawk.put(USER_NICKNAME, nickName)
             it.onComplete()
         }
+    }
+
+    override fun findPassword(id: String): Completable {
+        return Completable.never()
+    }
+
+    override fun resendEmail(id: String): Completable {
+        return Completable.never()
     }
 }
