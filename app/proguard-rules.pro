@@ -20,4 +20,4 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep public class dev.yunzai.milibrary.data.model.*
+-keep public class dev.yunzai.milibrary.data.model.**{ *; }

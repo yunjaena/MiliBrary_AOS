@@ -27,18 +27,20 @@ class LoginViewModel(
         userRepository.signIn(id, password.toSha256())
             .handleProgress(this)
             .withThread()
-            .subscribe({
-                loginSuccessEvent.call()
-            }, {
-                val response = it.toErrorResponse()
-                if (response.isNullOrEmpty()) {
-                    errorMessage.value = R.string.login_fail_error
-                    return@subscribe
+            .subscribe(
+                {
+                    loginSuccessEvent.call()
+                },
+                {
+                    val response = it.toErrorResponse()
+                    if (response.isNullOrEmpty()) {
+                        errorMessage.value = R.string.login_fail_error
+                        return@subscribe
+                    }
+                    response.forEach { message ->
+                        errorMessageFromServerEvent.value = message
+                    }
                 }
-                response.forEach { message ->
-                    errorMessageFromServerEvent.value = message
-                }
-            }).addTo(compositeDisposable)
-
+            ).addTo(compositeDisposable)
     }
 }
