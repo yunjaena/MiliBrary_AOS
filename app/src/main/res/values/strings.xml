@@ -36,4 +36,8 @@
     <string name="resend_email_under_line"><u>인증 메일 재전송</u></string>
     <string name="resend_email">인증 메일 재전송</string>
     <string name="resend_email_success">회원가입 인증 메일이 재전송되었습니다.\나라사랑포털 메일함을 확인해주세요.</string>
+    <string name="home">홈</string>
+    <string name="search">검색</string>
+    <string name="bookmark">북마크</string>
+    <string name="my_page">마이페이지</string>
 </resources>
