@@ -31,7 +31,7 @@ class ResendEmailActivity : ViewBindingActivity<ActivityResendEmailBinding>() {
         }
 
         binding.userIdEditText.setOnEditorActionListener { _, actionId, _ ->
-            when(actionId){
+            when (actionId) {
                 EditorInfo.IME_ACTION_DONE -> {
                     hideKeyBoard()
                     sendEmail()
@@ -70,7 +70,7 @@ class ResendEmailActivity : ViewBindingActivity<ActivityResendEmailBinding>() {
         }
     }
 
-    private fun sendEmail(){
+    private fun sendEmail() {
         val id = binding.userIdEditText.text.toString().trim()
         resendEmailViewModel.resendEmail(id)
     }

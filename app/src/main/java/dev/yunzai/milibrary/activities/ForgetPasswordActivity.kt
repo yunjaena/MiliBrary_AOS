@@ -5,7 +5,6 @@ import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.base.activity.ViewBindingActivity
 import dev.yunzai.milibrary.base.showAlertDialog
 import dev.yunzai.milibrary.databinding.ActivityForgetPasswordBinding
-import dev.yunzai.milibrary.util.setOnSingleClickListener
 import dev.yunzai.milibrary.viewmodels.ForgetPasswordViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -18,19 +17,19 @@ class ForgetPasswordActivity : ViewBindingActivity<ActivityForgetPasswordBinding
         init()
     }
 
-    private fun init(){
+    private fun init() {
         initView()
         initObserver()
     }
 
-    private fun initView(){
+    private fun initView() {
         binding.findPassword.setOnSingleClickListener {
             val id = binding.userIdEditText.text.toString().trim()
             forgetPasswordViewModel.findPassword(id)
         }
     }
 
-    private fun initObserver(){
+    private fun initObserver() {
         with(forgetPasswordViewModel) {
             errorMessage.observe(this@ForgetPasswordActivity) {
                 if (it == null) return@observe
@@ -47,7 +46,11 @@ class ForgetPasswordActivity : ViewBindingActivity<ActivityForgetPasswordBinding
             }
 
             findPasswordSuccessEvent.observe(this@ForgetPasswordActivity) {
-                showAlertDialog(getString(R.string.alert), getString(R.string.find_password_success), getString(R.string.ok)) { dialog ->
+                showAlertDialog(
+                    getString(R.string.alert),
+                    getString(R.string.find_password_success),
+                    getString(R.string.ok)
+                ) { dialog ->
                     dialog.dismiss()
                     finish()
                 }
