@@ -1,4 +1,23 @@
 <resources>
     <string name="app_name">MiliBrary</string>
     <string name="splash_title">당신의\n마음의 양식\n밀리브러리에서.</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">로그인</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="id">아이디</string>
+    <string name="password">비밀번호</string>
+    <string name="nick_name">닉네임</string>
+    <string name="find_password">비밀번호 찾기</string>
+    <string name="change_password">비밀번호 변경</string>
+    <string name="find_password_under_line"><u>비밀번호 찾기</u></string>
+    <string name="login">로그인</string>
+    <string name="sign_up">회원가입</string>
+    <string name="confirm">확인</string>
+    <string name="verify">인증</string>
 </resources>
