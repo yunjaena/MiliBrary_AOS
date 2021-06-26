@@ -65,6 +65,7 @@ private fun handleHttpException(throwable: Throwable) {
     if (throwable !is HttpException) return
     Logger.e("handle http exception : ${throwable.code()}")
     when (throwable.code()) {
+
     }
 }
 

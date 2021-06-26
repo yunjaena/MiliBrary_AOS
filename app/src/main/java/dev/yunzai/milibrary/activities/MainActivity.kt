@@ -1,4 +1,4 @@
-package dev.yunzai.milibrary.activity
+package dev.yunzai.milibrary.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -20,4 +20,13 @@
     <string name="sign_up">회원가입</string>
     <string name="confirm">확인</string>
     <string name="verify">인증</string>
+    <string name="password_check">비밀번호 확인</string>
+    <string name="signup_input_all_form_error">모든 항목을 작성해주세요.</string>
+    <string name="signup_password_input_different_error">입력하신 비밀번호가 다릅니다.</string>
+    <string name="sign_up_fail">회원가입에 실패했습니다.</string>
+    <string name="sign_up_success">회원가입에 성공했습니다.\n나라사랑포털에서 이메일 확인을 해주시기 바랍니다.</string>
+    <string name="alert">알림</string>
+    <string name="ok">확인</string>
+    <string name="login_fill_all_form_error">모든 항목을 입력해주세요.</string>
+    <string name="login_fail_error">로그인에 실패했습니다.</string>
 </resources>

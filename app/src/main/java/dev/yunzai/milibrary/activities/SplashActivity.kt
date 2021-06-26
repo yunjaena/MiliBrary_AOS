@@ -1,4 +1,4 @@
-package dev.yunzai.milibrary.activity
+package dev.yunzai.milibrary.activities
 
 import android.content.Intent
 import android.os.Bundle

@@ -1,10 +1,7 @@
 package dev.yunzai.milibrary.util
 
-import com.orhanobut.hawk.Hawk
 import com.orhanobut.logger.Logger
-import dev.yunzai.milibrary.constant.REFRESH_TOKEN
 import dev.yunzai.milibrary.data.UserRepository
-import dev.yunzai.milibrary.data.model.JwtResponse
 import io.reactivex.rxjava3.subjects.PublishSubject
 import okhttp3.Authenticator
 import okhttp3.Request
@@ -17,29 +14,33 @@ class TokenAuthenticator(
     override fun authenticate(route: Route?, response: Response): Request? {
         try {
             if (response.code() != 401) return null
+
             val tokenResult = getRefreshedJwtTokenResult()
 
-            if (tokenResult.isFailure) {
+            tokenResult.onFailure {
                 Logger.d("$TAG token updated failed : ${tokenResult.exceptionOrNull()}")
                 return null
             }
 
-            val jwtToken = tokenResult.getOrNull()
-            if (jwtToken?.accessToken?.token == null) {
-                Logger.d("$TAG token is empty")
-                return null
+            tokenResult.onSuccess { accessToken ->
+                if (accessToken.isEmpty()) {
+                    Logger.d("$TAG token is empty")
+                    return null
+                }
+                Logger.d("$TAG token updated : $accessToken")
+                return getRequest(response, accessToken)
             }
-            Logger.d("$TAG token updated : $jwtToken")
-            return getRequest(response, jwtToken.accessToken.token)
         } catch (e: Exception) {
             return null
         }
+
+        return null
     }
 
-    private fun getRefreshedJwtTokenResult(): Result<JwtResponse> {
-        val publishSubject: PublishSubject<Result<JwtResponse>> = PublishSubject.create()
-        val refreshToken = Hawk.get(REFRESH_TOKEN, "")
-        userRepository.refreshToken(refreshToken)
+    private fun getRefreshedJwtTokenResult(): Result<String> {
+        val publishSubject: PublishSubject<Result<String>> = PublishSubject.create()
+        userRepository.refreshToken()
+            .andThen(userRepository.getAccessToken())
             .subscribe({
                 publishSubject.onNext(Result.success(it))
                 publishSubject.onComplete()
