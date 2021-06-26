@@ -3,12 +3,13 @@
     package="dev.yunzai.milibrary">
 
     <application
+        android:name=".MilibraryApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MiliBrary">
+        android:theme="@style/Theme.MiliBrary.NoActionBar">
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/Theme.MiliBrary.NoActionBar">
@@ -19,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.LoginActivity" />
     </application>
 
 </manifest>

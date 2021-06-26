@@ -1,8 +1,8 @@
 package dev.yunzai.milibrary.data
 
+import dev.yunzai.milibrary.data.model.JwtResponse
 import io.reactivex.rxjava3.core.Single
 
 interface UserDataSource {
-    // TODO => Change return type
-    fun refreshToken(): Single<Unit>
+    fun refreshToken(accessToken: String): Single<JwtResponse>
 }

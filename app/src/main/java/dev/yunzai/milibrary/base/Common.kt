@@ -1,10 +1,14 @@
 package dev.yunzai.milibrary.base
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
+import android.view.WindowInsets
+import android.view.WindowManager
 import dev.yunzai.milibrary.R
 
 fun Context.showProgressDialog(userDim: Boolean = true): AlertDialog {
@@ -44,4 +48,24 @@ fun Context.showAlertDialog(
         )
     }
     dialog.show()
+}
+
+fun Activity.hideStatusBar() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        window.insetsController?.hide(WindowInsets.Type.statusBars())
+    } else {
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+    }
+}
+
+fun Activity.showStatusBar() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        window.insetsController?.show(WindowInsets.Type.statusBars())
+    } else {
+        window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+    }
 }
