@@ -18,7 +18,6 @@ class SplashActivity : ViewBindingActivity<ActivitySplashBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         hideStatusBar()
-        setContentView(R.layout.activity_splash)
         init()
     }
 

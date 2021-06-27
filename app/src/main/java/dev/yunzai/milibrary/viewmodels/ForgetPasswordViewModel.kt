@@ -18,7 +18,7 @@ class ForgetPasswordViewModel(
     val findPasswordSuccessEvent = SingleLiveEvent<String>()
 
     fun findPassword(id: String) {
-        if(id.isNullOrEmpty()){
+        if (id.isNullOrEmpty()) {
             errorMessage.value = R.string.id_empty_error
             return
         }
@@ -28,7 +28,7 @@ class ForgetPasswordViewModel(
             .withThread()
             .subscribe({
                 findPasswordSuccessEvent.call()
-            },{
+            }, {
                 val response = it.toErrorResponse()
                 if (response.isNullOrEmpty()) {
                     errorMessage.value = R.string.find_password_fail_error

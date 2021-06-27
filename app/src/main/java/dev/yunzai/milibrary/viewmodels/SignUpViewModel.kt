@@ -5,7 +5,12 @@ import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.base.viewmodel.ViewModelBase
 import dev.yunzai.milibrary.data.UserRepository
 import dev.yunzai.milibrary.data.model.toErrorResponse
-import dev.yunzai.milibrary.util.*
+import dev.yunzai.milibrary.util.SingleLiveEvent
+import dev.yunzai.milibrary.util.handleProgress
+import dev.yunzai.milibrary.util.isPasswordValid
+import dev.yunzai.milibrary.util.toSha256
+import dev.yunzai.milibrary.util.withThread
+
 import io.reactivex.rxjava3.kotlin.addTo
 
 class SignUpViewModel(
@@ -21,7 +26,7 @@ class SignUpViewModel(
             return
         }
 
-        if(!password.isPasswordValid()){
+        if (!password.isPasswordValid()) {
             errorMessage.value = R.string.password_format_error
             return
         }
@@ -34,18 +39,20 @@ class SignUpViewModel(
         userRepository.signUp(id, password.toSha256())
             .handleProgress(this)
             .withThread()
-            .subscribe({
-                signUpSuccessEvent.call()
-            }, {
-                val response = it.toErrorResponse()
-                if (response.isNullOrEmpty()) {
-                    errorMessage.value = R.string.sign_up_fail
-                    return@subscribe
+            .subscribe(
+                {
+                    signUpSuccessEvent.call()
+                },
+                {
+                    val response = it.toErrorResponse()
+                    if (response.isNullOrEmpty()) {
+                        errorMessage.value = R.string.sign_up_fail
+                        return@subscribe
+                    }
+                    response.forEach { message ->
+                        errorMessageFromServerEvent.value = message
+                    }
                 }
-                response.forEach { message ->
-                    errorMessageFromServerEvent.value = message
-                }
-            }).addTo(compositeDisposable)
-
+            ).addTo(compositeDisposable)
     }
 }

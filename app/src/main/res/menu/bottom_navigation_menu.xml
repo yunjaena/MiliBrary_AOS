@@ -2,22 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/page_home"
-        android:enabled="true"
         android:icon="@drawable/ic_home"
+        android:enabled="true"
         android:title="@string/home"/>
 
     <item
         android:id="@+id/page_search"
         android:icon="@drawable/ic_search"
+        android:enabled="true"
         android:title="@string/search"/>
 
     <item
         android:id="@+id/page_bookmark"
         android:icon="@drawable/ic_bookmark"
+        android:enabled="true"
         android:title="@string/bookmark"/>
 
     <item
         android:id="@+id/page_my_page"
         android:icon="@drawable/ic_person"
+        android:enabled="true"
         android:title="@string/my_page"/>
 </menu>
