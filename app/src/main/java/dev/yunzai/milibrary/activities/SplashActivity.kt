@@ -30,10 +30,12 @@ class SplashActivity : ViewBindingActivity<ActivitySplashBinding>() {
             }
         }
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            splashViewModel.checkAutoLogin()
-        }, 2000L)
-
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                splashViewModel.checkAutoLogin()
+            },
+            2000L
+        )
     }
 
     private fun goToMainActivity() {
