@@ -7,6 +7,7 @@ import dev.yunzai.milibrary.adapter.BookListAdapter
 import dev.yunzai.milibrary.adapter.ReviewListAdapter
 import dev.yunzai.milibrary.base.fragment.ViewBindingFragment
 import dev.yunzai.milibrary.databinding.FragmentHomeBinding
+import dev.yunzai.milibrary.util.goToBookDetailActivity
 import dev.yunzai.milibrary.viewmodels.HomeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,8 +30,14 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
     }
 
     private fun initView() {
-        randomBookListAdapter = BookListAdapter()
-        newBookListAdapter = BookListAdapter()
+        randomBookListAdapter = BookListAdapter {
+            if (it.id != null)
+                requireContext().goToBookDetailActivity(it.id)
+        }
+        newBookListAdapter = BookListAdapter {
+            if (it.id != null)
+                requireContext().goToBookDetailActivity(it.id)
+        }
         randomReviewListAdapter = ReviewListAdapter()
         binding.randomBookRecyclerView.adapter = randomBookListAdapter
         binding.newBookRecyclerView.adapter = newBookListAdapter

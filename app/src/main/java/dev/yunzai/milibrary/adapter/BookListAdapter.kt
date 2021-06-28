@@ -9,7 +9,9 @@ import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.data.model.Book
 import dev.yunzai.milibrary.databinding.ItemBookBinding
 
-class BookListAdapter : RecyclerView.Adapter<BookListAdapter.ViewHolder>() {
+class BookListAdapter(
+    private val clickListener: ((Book) -> Unit)? = null
+) : RecyclerView.Adapter<BookListAdapter.ViewHolder>() {
     private val list = arrayListOf<Book>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,6 +28,9 @@ class BookListAdapter : RecyclerView.Adapter<BookListAdapter.ViewHolder>() {
                 .load(item.thumbnail)
                 .thumbnail(0.5f)
                 .into(bookImage)
+        }
+        holder.itemView.setOnClickListener {
+            clickListener?.invoke(item)
         }
     }
 

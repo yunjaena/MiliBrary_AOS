@@ -44,4 +44,7 @@
     <string name="new_book">최신 도서</string>
     <string name="random_review">오늘의 랜덤 리뷰</string>
     <string name="random_book">오늘의 랜덤 책</string>
+    <string name="description">설명</string>
+    <string name="rating_and_review"><![CDATA[평점 & 리뷰]]></string>
+    <string name="isbn_title">isbn : %s</string>
 </resources>
