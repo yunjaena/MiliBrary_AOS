@@ -6,7 +6,7 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 interface ReviewDataSource {
-    fun postReview(review: Review): Single<Review>
+    fun postReview(bookId: Int, review: Review): Single<Review>
 
     fun deleteReview(bookId: Int, reviewId: Int): Completable
 

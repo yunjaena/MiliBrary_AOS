@@ -46,7 +46,7 @@ interface AuthApi {
     ): Single<BookList>
 
     @POST("/api/book/{bookId}/review")
-    fun postReview(@Body review: Review): Single<Review>
+    fun postReview(@Path("bookId") bookId: Int, @Body review: Review): Single<Review>
 
     @DELETE("/api/book/{bookId}/review/{reviewId}")
     fun deleteReview(@Path("bookId") bookId: Int, @Path("reviewId") reviewId: Int): Completable

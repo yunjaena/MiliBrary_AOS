@@ -30,6 +30,9 @@
         <activity
             android:name=".activities.BookDetailActivity"
             android:theme="@style/Theme.MiliBrary" />
+        <activity
+            android:name=".activities.ReviewEditActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

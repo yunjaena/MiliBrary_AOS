@@ -5,7 +5,12 @@ import com.orhanobut.logger.Logger
 import dev.yunzai.milibrary.BuildConfig
 import dev.yunzai.milibrary.api.AuthApi
 import dev.yunzai.milibrary.api.NoAuthApi
-import dev.yunzai.milibrary.constant.*
+import dev.yunzai.milibrary.constant.NO_AUTH
+import dev.yunzai.milibrary.constant.PRODUCTION_SERVER_BASE_URL
+import dev.yunzai.milibrary.constant.STAGE_SERVER_BASE_URL
+import dev.yunzai.milibrary.constant.URL
+import dev.yunzai.milibrary.constant.AUTH
+import dev.yunzai.milibrary.constant.ACCESS_TOKEN
 import dev.yunzai.milibrary.util.TokenAuthenticator
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -50,7 +55,6 @@ val netWorkModule = module {
                     .build()
                 chain.proceed(newRequest)
             }
-
         }.build()
     }
 

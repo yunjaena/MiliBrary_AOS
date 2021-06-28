@@ -10,8 +10,8 @@ import io.reactivex.rxjava3.core.Single
 class ReviewRemoteDataSource(
     private val authApi: AuthApi
 ) : ReviewDataSource {
-    override fun postReview(review: Review): Single<Review> {
-        return authApi.postReview(review)
+    override fun postReview(bookId: Int, review: Review): Single<Review> {
+        return authApi.postReview(bookId, review)
     }
 
     override fun deleteReview(bookId: Int, reviewId: Int): Completable {

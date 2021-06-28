@@ -13,15 +13,12 @@ import dev.yunzai.milibrary.util.withThread
 import io.reactivex.rxjava3.kotlin.addTo
 
 class BookDetailViewModel(
-    private val bookRepository: BookRepository,
-    private val reviewRepository: ReviewRepository
+    private val bookRepository: BookRepository
 ) : ViewModelBase() {
     val bookDetailData: LiveData<Book>
         get() = _bookDetailData
     private val _bookDetailData = MutableLiveData<Book>()
-    val myReview: LiveData<Review>
-        get() = _myReview
-    private val _myReview = MutableLiveData<Review>()
+
 
     fun loadBookDetail(bookId: Int) {
         bookRepository.getBookDetail(bookId)
@@ -31,20 +28,6 @@ class BookDetailViewModel(
             .subscribe(
                 {
                     _bookDetailData.value = it
-                },
-                {
-                }
-            ).addTo(compositeDisposable)
-    }
-
-    fun getMyReview(bookId: Int) {
-        reviewRepository.getMyReview(bookId)
-            .handleHttpException()
-            .withThread()
-            .handleProgress(this)
-            .subscribe(
-                {
-                    _myReview.value = it
                 },
                 {
                 }

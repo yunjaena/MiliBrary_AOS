@@ -1,6 +1,5 @@
 package dev.yunzai.milibrary.data
 
-import dev.yunzai.milibrary.data.ReviewDataSource
 import dev.yunzai.milibrary.data.model.Review
 import dev.yunzai.milibrary.data.model.ReviewList
 import io.reactivex.rxjava3.core.Completable
@@ -9,8 +8,8 @@ import io.reactivex.rxjava3.core.Single
 class ReviewRepository(
     private val reviewRemoteDataSource: ReviewDataSource
 ) : ReviewDataSource {
-    override fun postReview(review: Review): Single<Review> {
-        return reviewRemoteDataSource.postReview(review)
+    override fun postReview(bookId: Int, review: Review): Single<Review> {
+        return reviewRemoteDataSource.postReview(bookId, review)
     }
 
     override fun deleteReview(bookId: Int, reviewId: Int): Completable {

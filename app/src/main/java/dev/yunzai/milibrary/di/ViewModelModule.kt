@@ -10,6 +10,7 @@ val viewModelModule = module {
     viewModel { ForgetPasswordViewModel(get()) }
     viewModel { ResendEmailViewModel(get()) }
     viewModel { SplashViewModel(get()) }
-    viewModel { BookDetailViewModel(get(), get()) }
+    viewModel { BookDetailViewModel(get()) }
+    viewModel { ReviewViewModel(get()) }
     viewModel { HomeViewModel(get(), get()) }
 }

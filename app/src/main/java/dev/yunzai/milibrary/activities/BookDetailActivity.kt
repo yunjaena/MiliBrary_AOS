@@ -7,12 +7,15 @@ import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.base.activity.ViewBindingActivity
 import dev.yunzai.milibrary.constant.EXTRA_BOOK_ID
 import dev.yunzai.milibrary.databinding.ActivityBookDetailBinding
+import dev.yunzai.milibrary.util.goToReviewEditActivity
 import dev.yunzai.milibrary.viewmodels.BookDetailViewModel
+import dev.yunzai.milibrary.viewmodels.ReviewViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BookDetailActivity : ViewBindingActivity<ActivityBookDetailBinding>() {
     override val layoutId: Int = R.layout.activity_book_detail
     private val bookDetailViewModel: BookDetailViewModel by viewModel()
+    private val reviewViewModel: ReviewViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,10 +23,8 @@ class BookDetailActivity : ViewBindingActivity<ActivityBookDetailBinding>() {
     }
 
     private fun init() {
-        val bookId = intent.getIntExtra(EXTRA_BOOK_ID, -1)
         initView()
         initObserver()
-        bookDetailViewModel.loadBookDetail(bookId)
     }
 
     private fun initView() {
@@ -35,7 +36,8 @@ class BookDetailActivity : ViewBindingActivity<ActivityBookDetailBinding>() {
     override fun onResume() {
         super.onResume()
         val bookId = intent.getIntExtra(EXTRA_BOOK_ID, -1)
-        bookDetailViewModel.getMyReview(bookId)
+        reviewViewModel.getMyReview(bookId)
+        bookDetailViewModel.loadBookDetail(bookId)
     }
 
     private fun initObserver() {
@@ -58,17 +60,23 @@ class BookDetailActivity : ViewBindingActivity<ActivityBookDetailBinding>() {
                 binding.descriptionTextView.text = description ?: ""
             }
         }
-        bookDetailViewModel.myReview.observe(this) { review ->
+        reviewViewModel.myReview.observe(this) { review ->
+            val bookId = intent.getIntExtra(EXTRA_BOOK_ID, -1)
             if (review.bookId == null) {
-                binding.myRatingGroup.visibility = View.INVISIBLE
+                binding.myRatingGroup.visibility = View.GONE
                 binding.myReviewEditTextView.text = getString(R.string.write_review)
                 binding.myReviewEditTextView.setOnClickListener {
+                    goToReviewEditActivity(bookId, false)
                 }
                 return@observe
             }
             binding.myRatingGroup.visibility = View.VISIBLE
             binding.myReviewEditTextView.text = getString(R.string.edit_review)
+            binding.myReviewCreatedDateTextView.text = review.createdAt
+            binding.myRatingBar.rating = (review.score ?: 0).toFloat()
+            binding.myReviewTextView.text = review.comment ?: ""
             binding.myReviewEditTextView.setOnClickListener {
+                goToReviewEditActivity(bookId, true)
             }
         }
     }

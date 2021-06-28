@@ -50,4 +50,6 @@
     <string name="my_rating">나의 평점은?</string>
     <string name="write_review">리뷰 작성하기</string>
     <string name="edit_review">리뷰 수정하기</string>
+    <string name="submit">제출</string>
+    <string name="review_write_hint">리뷰를 작성해주세요!</string>
 </resources>
