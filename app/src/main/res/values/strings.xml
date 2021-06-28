@@ -42,4 +42,6 @@
     <string name="my_page">마이페이지</string>
     <string name="password_format_error">비밀번호는 최소 8글자 이상이고 특수문자를 포함한 영문자 및 숫자만으로 이루어져야 합니다.</string>
     <string name="new_book">최신 도서</string>
+    <string name="random_review">오늘의 랜덤 리뷰</string>
+    <string name="random_book">오늘의 랜덤 책</string>
 </resources>

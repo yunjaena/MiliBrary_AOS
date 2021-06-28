@@ -47,6 +47,19 @@ fun Completable.toSingleConvert(): Single<Boolean> {
         .onErrorReturnItem(false)
 }
 
+
+fun <T> Observable<T>.withThread(): Observable<T> {
+    return this.subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+}
+
+fun <T> Observable<T>.handleHttpException(): Observable<T> {
+    return this.doOnError {
+        handleHttpException(it)
+    }
+}
+
+
 fun <T> Single<T>.handleProgress(viewModel: ViewModelBase): Single<T> {
     return this.doOnSubscribe { viewModel.isLoading.postValue(true) }
         .doFinally { viewModel.isLoading.postValue(false) }
