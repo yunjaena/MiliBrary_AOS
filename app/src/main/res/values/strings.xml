@@ -47,4 +47,7 @@
     <string name="description">설명</string>
     <string name="rating_and_review"><![CDATA[평점 & 리뷰]]></string>
     <string name="isbn_title">isbn : %s</string>
+    <string name="my_rating">나의 평점은?</string>
+    <string name="write_review">리뷰 작성하기</string>
+    <string name="edit_review">리뷰 수정하기</string>
 </resources>

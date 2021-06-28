@@ -124,6 +124,66 @@
                 app:layout_constraintTop_toBottomOf="@id/description_title"
                 tools:text="본문" />
 
+
+            <TextView
+                android:id="@+id/my_rating_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/my_rating"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@+id/book_image"
+                app:layout_constraintTop_toBottomOf="@+id/description_text_view" />
+
+            <RatingBar
+                android:id="@+id/my_rating_bar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:focusable="false"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:progressTint="@color/primaryColor"
+                app:layout_constraintBottom_toBottomOf="@+id/my_rating_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/my_rating_title"
+                app:layout_constraintTop_toTopOf="@+id/my_rating_title"
+                tools:rating="1" />
+
+            <TextView
+                android:id="@+id/my_review_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/my_rating_bar"
+                app:layout_constraintStart_toStartOf="@+id/my_rating_bar"
+                app:layout_constraintTop_toBottomOf="@+id/my_rating_bar"
+                tools:text="너무 좋아요" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/my_rating_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="my_rating_bar, my_review_text_view"
+                tools:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/my_review_edit_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColor="@color/primaryLightColor"
+                app:layout_constraintEnd_toEndOf="@+id/my_rating_bar"
+                app:layout_constraintStart_toStartOf="@+id/my_rating_bar"
+                app:layout_constraintTop_toBottomOf="@+id/my_review_text_view"
+                tools:text="리뷰 작성하기" />
+
+
             <TextView
                 android:id="@+id/rating_title"
                 android:layout_width="wrap_content"
@@ -135,7 +195,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@+id/book_image"
-                app:layout_constraintTop_toBottomOf="@+id/description_text_view" />
+                app:layout_constraintTop_toBottomOf="@+id/my_review_edit_text_view" />
 
             <TextView
                 android:id="@+id/rating_text_view"
@@ -154,18 +214,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:isIndicator="true"
                 android:focusable="false"
+                android:isIndicator="true"
                 android:numStars="5"
                 android:progressTint="@color/primaryColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/rating_detail_arrow_image_view"
                 app:layout_constraintStart_toEndOf="@id/rating_text_view"
                 app:layout_constraintTop_toBottomOf="@id/rating_title"
-                tools:rating="1"
-
-
-                />
+                tools:rating="1" />
 
             <ImageView
                 android:id="@+id/rating_detail_arrow_image_view"

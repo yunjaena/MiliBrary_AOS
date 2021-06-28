@@ -1,6 +1,7 @@
 package dev.yunzai.milibrary.activities
 
 import android.os.Bundle
+import android.view.View
 import com.bumptech.glide.Glide
 import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.base.activity.ViewBindingActivity
@@ -31,6 +32,12 @@ class BookDetailActivity : ViewBindingActivity<ActivityBookDetailBinding>() {
         useDefaultLoading(bookDetailViewModel)
     }
 
+    override fun onResume() {
+        super.onResume()
+        val bookId = intent.getIntExtra(EXTRA_BOOK_ID, -1)
+        bookDetailViewModel.getMyReview(bookId)
+    }
+
     private fun initObserver() {
         bookDetailViewModel.bookDetailData.observe(this) { book ->
             with(book) {
@@ -49,6 +56,19 @@ class BookDetailActivity : ViewBindingActivity<ActivityBookDetailBinding>() {
                 binding.ratingTextView.text = rating.toString()
                 binding.ratingBar.rating = rating
                 binding.descriptionTextView.text = description ?: ""
+            }
+        }
+        bookDetailViewModel.myReview.observe(this) { review ->
+            if (review.bookId == null) {
+                binding.myRatingGroup.visibility = View.INVISIBLE
+                binding.myReviewEditTextView.text = getString(R.string.write_review)
+                binding.myReviewEditTextView.setOnClickListener {
+                }
+                return@observe
+            }
+            binding.myRatingGroup.visibility = View.VISIBLE
+            binding.myReviewEditTextView.text = getString(R.string.edit_review)
+            binding.myReviewEditTextView.setOnClickListener {
             }
         }
     }
