@@ -87,4 +87,8 @@ ext {
     playServiceAuth = "com.google.android.gms:play-services-auth:$play_service_auth_version"
     def play_service_auth_api_phone_version = "17.4.0"
     playServiceAuthApiPhone = "com.google.android.gms:play-services-auth-api-phone:$play_service_auth_api_phone_version"
+
+    /* Dependency - Paginate */
+    def paginate_version = "1.0.0"
+    paginate = "com.github.markomilos:paginate:$paginate_version"
 }

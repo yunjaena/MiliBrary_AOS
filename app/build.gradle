@@ -112,4 +112,7 @@ dependencies {
     /* Dependency - SMS Verification */
     implementation project.playServiceAuth
     implementation project.playServiceAuthApiPhone
+
+    /* Dependency - Paginate */
+    implementation project.paginate
 }

@@ -38,6 +38,8 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
         binding.refreshLayout.setOnRefreshListener {
             fetchData()
         }
+        binding.loadMoreNewBookListButton.setOnClickListener {
+        }
     }
 
     private fun fetchData() {

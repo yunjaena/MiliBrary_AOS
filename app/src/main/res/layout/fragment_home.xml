@@ -15,8 +15,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                >
+                android:layout_marginBottom="20dp">
 
                 <TextView
                     android:id="@+id/new_book_text_view"
@@ -29,6 +28,17 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/load_more_new_book_list_button"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_navigate_next"
+                    app:layout_constraintBottom_toBottomOf="@id/new_book_text_view"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/new_book_text_view" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/new_book_recycler_view"
@@ -89,8 +99,8 @@
                     android:layout_marginEnd="20dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/random_review_text_view"
                     app:layout_constraintTop_toBottomOf="@id/random_review_text_view"
                     tools:listitem="@layout/item_review" />
