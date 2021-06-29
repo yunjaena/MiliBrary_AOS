@@ -7,8 +7,10 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import dev.yunzai.milibrary.R
 
 fun Context.showProgressDialog(userDim: Boolean = true): AlertDialog {
@@ -71,7 +73,9 @@ fun Activity.showStatusBar() {
 }
 
 fun Activity.hideKeyBoard() {
-    window.setSoftInputMode(
-        WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-    )
+    val inputManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    val currentFocusedView: View? = currentFocus
+    if (currentFocusedView != null) {
+        inputManager.hideSoftInputFromWindow(currentFocusedView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
 }

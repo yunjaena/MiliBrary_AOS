@@ -52,4 +52,7 @@
     <string name="edit_review">리뷰 수정하기</string>
     <string name="submit">제출</string>
     <string name="review_write_hint">리뷰를 작성해주세요!</string>
+    <string name="search_word">검색어</string>
+    <string name="author">저자</string>
+    <string name="title">제목</string>
 </resources>
