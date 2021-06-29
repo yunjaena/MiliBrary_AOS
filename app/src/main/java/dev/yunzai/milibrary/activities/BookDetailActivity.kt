@@ -8,6 +8,7 @@ import dev.yunzai.milibrary.base.activity.ViewBindingActivity
 import dev.yunzai.milibrary.constant.EXTRA_BOOK_ID
 import dev.yunzai.milibrary.databinding.ActivityBookDetailBinding
 import dev.yunzai.milibrary.util.goToReviewEditActivity
+import dev.yunzai.milibrary.util.goToReviewListActivity
 import dev.yunzai.milibrary.viewmodels.BookDetailViewModel
 import dev.yunzai.milibrary.viewmodels.ReviewViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -31,6 +32,10 @@ class BookDetailActivity : ViewBindingActivity<ActivityBookDetailBinding>() {
         setBaseAppBar()
         setBackKey()
         useDefaultLoading(bookDetailViewModel)
+        binding.ratingDetailArrowImageView.setOnClickListener {
+            val bookId = intent.getIntExtra(EXTRA_BOOK_ID, -1)
+            goToReviewListActivity(bookId)
+        }
     }
 
     override fun onResume() {

@@ -18,6 +18,9 @@ class ReviewViewModel(
         get() = _myReview
     private val _myReview = MutableLiveData<Review>()
     val editReviewCompleteEvent = SingleLiveEvent<Boolean>()
+    val listClearEvent = SingleLiveEvent<Boolean>()
+    val reviewListEvent = SingleLiveEvent<ArrayList<Review>>()
+    var nextUrl: String? = null
 
     fun getMyReview(bookId: Int) {
         reviewRepository.getMyReview(bookId)
@@ -59,5 +62,44 @@ class ReviewViewModel(
                 {
                 }
             ).addTo(compositeDisposable)
+    }
+
+    fun getReviewList(bookId: Int, isRefresh: Boolean = false) {
+        if (isRefresh)
+            nextUrl = null
+
+        if (nextUrl == null) {
+            reviewRepository.getSpecificBookReview(bookId, REVIEW_SIZE, ORDER, SORT_BY)
+                .handleHttpException()
+                .withThread()
+                .subscribe(
+                    {
+                        listClearEvent.call()
+                        nextUrl = it.links?.next
+                        reviewListEvent.value = it.reviews
+                    },
+                    {
+                    }
+                ).addTo(compositeDisposable)
+            return
+        }
+
+        reviewRepository.getSpecificBookReview(nextUrl!!)
+            .handleHttpException()
+            .withThread()
+            .subscribe(
+                {
+                    nextUrl = it.links?.next
+                    reviewListEvent.value = it.reviews
+                },
+                {
+                }
+            ).addTo(compositeDisposable)
+    }
+
+    companion object {
+        const val REVIEW_SIZE = 10
+        const val ORDER = "asc"
+        const val SORT_BY = "date"
     }
 }
