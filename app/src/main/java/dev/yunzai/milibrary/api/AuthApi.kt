@@ -4,16 +4,18 @@ import dev.yunzai.milibrary.data.model.Book
 import dev.yunzai.milibrary.data.model.BookList
 import dev.yunzai.milibrary.data.model.Review
 import dev.yunzai.milibrary.data.model.ReviewList
+import dev.yunzai.milibrary.data.model.Bookmark
+import dev.yunzai.milibrary.data.model.BookmarkList
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
-import retrofit2.http.Body
 import retrofit2.http.DELETE
-import retrofit2.http.Url
+import retrofit2.http.Body
 import retrofit2.http.PATCH
+import retrofit2.http.Url
 
 interface AuthApi {
     @GET("/api/book/{bookId}")
@@ -83,4 +85,19 @@ interface AuthApi {
 
     @GET
     fun getMyTotalReview(@Url url: String): Single<ReviewList>
+
+    @POST("/api/book/{bookId}/bookmark")
+    fun createBookMark(@Path("bookId") bookId: Int): Completable
+
+    @GET("/api/bookmark/{bookmarkId}")
+    fun getBookmark(@Path("bookmarkId") bookmarkId: Int): Single<Bookmark>
+
+    @DELETE("/api/bookmark/{bookmarkId}")
+    fun deleteMyBookMark(@Path("bookmarkId") bookmarkId: Int): Completable
+
+    @PATCH("/api/bookmark/{bookmarkId}")
+    fun editMyBookMark(@Path("bookmarkId") bookmarkId: Int, bookmark: Bookmark): Completable
+
+    @GET("/api/bookmarks/my")
+    fun getMyAllBookMark(): Single<BookmarkList>
 }

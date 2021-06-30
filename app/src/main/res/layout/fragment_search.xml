@@ -28,6 +28,7 @@
             android:background="@drawable/bg_round_corner_rectangle"
             android:hint="@string/search_word"
             android:padding="10dp"
+            android:maxLines="1"
             app:layout_constraintEnd_toStartOf="@+id/search_button"
             app:layout_constraintStart_toEndOf="@+id/filter_spinner"
             app:layout_constraintTop_toTopOf="parent" />

@@ -21,9 +21,9 @@ class ReviewLongListAdapter : RecyclerView.Adapter<ReviewLongListAdapter.ViewHol
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
         with(holder.binding) {
-            if (item.narasarangId != null) {
+            if (item.nickname != null) {
                 nickname.visibility = View.VISIBLE
-                nickname.text = item.narasarangId
+                nickname.text = item.nickname
             } else {
                 nickname.visibility = View.GONE
             }

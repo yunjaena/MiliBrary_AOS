@@ -2,6 +2,7 @@ package dev.yunzai.milibrary.activities
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.base.activity.ViewBindingActivity
@@ -9,7 +10,9 @@ import dev.yunzai.milibrary.constant.EXTRA_BOOK_ID
 import dev.yunzai.milibrary.databinding.ActivityBookDetailBinding
 import dev.yunzai.milibrary.util.goToReviewEditActivity
 import dev.yunzai.milibrary.util.goToReviewListActivity
+import dev.yunzai.milibrary.util.setOnSingleClickListener
 import dev.yunzai.milibrary.viewmodels.BookDetailViewModel
+import dev.yunzai.milibrary.viewmodels.BookMarkViewModel
 import dev.yunzai.milibrary.viewmodels.ReviewViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,6 +20,7 @@ class BookDetailActivity : ViewBindingActivity<ActivityBookDetailBinding>() {
     override val layoutId: Int = R.layout.activity_book_detail
     private val bookDetailViewModel: BookDetailViewModel by viewModel()
     private val reviewViewModel: ReviewViewModel by viewModel()
+    private val bookmarkViewModel: BookMarkViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +33,19 @@ class BookDetailActivity : ViewBindingActivity<ActivityBookDetailBinding>() {
     }
 
     private fun initView() {
+        val bookId = intent.getIntExtra(EXTRA_BOOK_ID, -1)
         setBaseAppBar()
         setBackKey()
         useDefaultLoading(bookDetailViewModel)
         binding.ratingDetailArrowImageView.setOnClickListener {
-            val bookId = intent.getIntExtra(EXTRA_BOOK_ID, -1)
             goToReviewListActivity(bookId)
+        }
+
+        binding.bookMarkImageView.setOnSingleClickListener {
+            when (bookmarkViewModel.bookmark.value == null) {
+                true -> bookmarkViewModel.createBookmark(bookId)
+                false -> bookmarkViewModel.deleteBookmark(bookmarkViewModel.bookmark.value?.id)
+            }
         }
     }
 
@@ -43,6 +54,7 @@ class BookDetailActivity : ViewBindingActivity<ActivityBookDetailBinding>() {
         val bookId = intent.getIntExtra(EXTRA_BOOK_ID, -1)
         reviewViewModel.getMyReview(bookId)
         bookDetailViewModel.loadBookDetail(bookId)
+        bookmarkViewModel.getMyBookmark(bookId)
     }
 
     private fun initObserver() {
@@ -82,6 +94,26 @@ class BookDetailActivity : ViewBindingActivity<ActivityBookDetailBinding>() {
             binding.myReviewTextView.text = review.comment ?: ""
             binding.myReviewEditTextView.setOnClickListener {
                 goToReviewEditActivity(bookId, true)
+            }
+        }
+
+        bookmarkViewModel.bookmark.observe(this) {
+            binding.bookMarkImageView.visibility = View.VISIBLE
+            when (it == null) {
+                true -> binding.bookMarkImageView.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this@BookDetailActivity,
+                        R.drawable.ic_bookmark_unselect
+                    )
+                )
+                false -> {
+                    binding.bookMarkImageView.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            this@BookDetailActivity,
+                            R.drawable.ic_bookmark_select
+                        )
+                    )
+                }
             }
         }
     }

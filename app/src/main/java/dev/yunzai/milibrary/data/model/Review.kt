@@ -9,4 +9,5 @@ data class Review(
     val score: Double? = null,
     val title: String? = null,
     val thumbnail: String? = null,
+    val nickname: String? = null
 )

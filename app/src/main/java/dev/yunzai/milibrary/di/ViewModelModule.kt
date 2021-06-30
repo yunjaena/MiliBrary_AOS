@@ -14,4 +14,5 @@ val viewModelModule = module {
     viewModel { ReviewViewModel(get()) }
     viewModel { BookListViewModel(get()) }
     viewModel { HomeViewModel(get(), get()) }
+    viewModel { BookMarkViewModel(get()) }
 }
