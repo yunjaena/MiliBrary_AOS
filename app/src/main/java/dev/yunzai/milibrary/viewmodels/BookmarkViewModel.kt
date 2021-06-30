@@ -3,19 +3,20 @@ package dev.yunzai.milibrary.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dev.yunzai.milibrary.base.viewmodel.ViewModelBase
+import dev.yunzai.milibrary.data.BookRepository
 import dev.yunzai.milibrary.data.BookmarkRepository
 import dev.yunzai.milibrary.data.model.Bookmark
-import dev.yunzai.milibrary.data.model.BookmarkList
 import dev.yunzai.milibrary.util.SingleLiveEvent
 import dev.yunzai.milibrary.util.handleHttpException
 import dev.yunzai.milibrary.util.handleProgress
 import dev.yunzai.milibrary.util.withThread
 import io.reactivex.rxjava3.core.Single
 
-class BookMarkViewModel(
-    private val bookmarkRepository: BookmarkRepository
+class BookmarkViewModel(
+    private val bookmarkRepository: BookmarkRepository,
+    private val bookRepository: BookRepository
 ) : ViewModelBase() {
-    val bookmarkListFetchEvent = SingleLiveEvent<BookmarkList?>()
+    val bookmarkFetchEvent = SingleLiveEvent<Bookmark?>()
     val bookmark: LiveData<Bookmark?>
         get() = _bookMark
     private val _bookMark = MutableLiveData<Bookmark?>()
@@ -37,12 +38,28 @@ class BookMarkViewModel(
 
     fun getMyAllBookmark() {
         bookmarkRepository.getMyAllBookMark()
+            .toObservable()
+            .flatMapIterable { it.bookmarks }
+            .flatMapSingle { bookmark ->
+                bookRepository.getBookDetail(bookmark.bookId!!)
+                    .map { book ->
+                        Bookmark(
+                            bookId = bookmark.bookId,
+                            content = bookmark.content,
+                            createdAt = bookmark.createdAt,
+                            id = bookmark.id,
+                            narasarangId = bookmark.narasarangId,
+                            title = book.title,
+                            authors = book.authors,
+                            thumbnail = book.thumbnail
+                        )
+                    }
+            }
             .handleHttpException()
-            .handleProgress(this)
             .withThread()
             .subscribe(
                 {
-                    bookmarkListFetchEvent.value = it
+                    bookmarkFetchEvent.value = it
                 },
                 {
 

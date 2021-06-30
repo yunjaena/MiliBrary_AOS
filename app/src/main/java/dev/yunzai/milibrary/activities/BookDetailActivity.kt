@@ -12,7 +12,7 @@ import dev.yunzai.milibrary.util.goToReviewEditActivity
 import dev.yunzai.milibrary.util.goToReviewListActivity
 import dev.yunzai.milibrary.util.setOnSingleClickListener
 import dev.yunzai.milibrary.viewmodels.BookDetailViewModel
-import dev.yunzai.milibrary.viewmodels.BookMarkViewModel
+import dev.yunzai.milibrary.viewmodels.BookmarkViewModel
 import dev.yunzai.milibrary.viewmodels.ReviewViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,7 +20,7 @@ class BookDetailActivity : ViewBindingActivity<ActivityBookDetailBinding>() {
     override val layoutId: Int = R.layout.activity_book_detail
     private val bookDetailViewModel: BookDetailViewModel by viewModel()
     private val reviewViewModel: ReviewViewModel by viewModel()
-    private val bookmarkViewModel: BookMarkViewModel by viewModel()
+    private val bookmarkViewModel: BookmarkViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
