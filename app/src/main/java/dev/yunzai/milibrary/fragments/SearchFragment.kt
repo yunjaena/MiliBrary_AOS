@@ -2,6 +2,7 @@ package dev.yunzai.milibrary.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import com.orhanobut.logger.Logger
 import com.paginate.Paginate
@@ -33,6 +34,13 @@ class SearchFragment : ViewBindingFragment<FragmentSearchBinding>() {
     }
 
     private fun initView() {
+        binding.searchEditText.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                search()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
         bookLongListAdapter = BookLongListAdapter {
             if (it.id != null)
                 requireContext().goToBookDetailActivity(it.id)
@@ -50,11 +58,7 @@ class SearchFragment : ViewBindingFragment<FragmentSearchBinding>() {
             }
         }
         binding.searchButton.setOnSingleClickListener {
-            requireActivity().hideKeyBoard()
-            bookLongListAdapter.clear()
-            val searchTarget = target
-            val query = binding.searchEditText.text.toString().trim()
-            bookListViewModel.searchBook(searchTarget, query)
+            search()
         }
 
         val pagingCallBack = object : Paginate.Callbacks {
@@ -83,6 +87,13 @@ class SearchFragment : ViewBindingFragment<FragmentSearchBinding>() {
         }
     }
 
+    private fun search() {
+        requireActivity().hideKeyBoard()
+        bookLongListAdapter.clear()
+        val searchTarget = target
+        val query = binding.searchEditText.text.toString().trim()
+        bookListViewModel.searchBook(searchTarget, query)
+    }
 
     companion object {
         const val TAG = "SearchFragment"
