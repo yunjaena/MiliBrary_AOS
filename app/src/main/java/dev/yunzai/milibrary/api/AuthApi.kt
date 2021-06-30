@@ -96,7 +96,7 @@ interface AuthApi {
     fun deleteMyBookMark(@Path("bookmarkId") bookmarkId: Int): Completable
 
     @PATCH("/api/bookmark/{bookmarkId}")
-    fun editMyBookMark(@Path("bookmarkId") bookmarkId: Int, bookmark: Bookmark): Completable
+    fun editMyBookMark(@Path("bookmarkId") bookmarkId: Int, @Body bookmark: Bookmark): Completable
 
     @GET("/api/bookmarks/my")
     fun getMyAllBookMark(): Single<BookmarkList>

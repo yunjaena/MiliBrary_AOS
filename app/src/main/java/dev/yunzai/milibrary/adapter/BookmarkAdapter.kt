@@ -2,7 +2,9 @@ package dev.yunzai.milibrary.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.MenuInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import dev.yunzai.milibrary.R
@@ -14,6 +16,7 @@ class BookmarkAdapter(
     private val clickListener: ((Bookmark) -> Unit)? = null
 ) : RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
     private val list = arrayListOf<Bookmark>()
+    var deleteListener: ((Bookmark) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemBookmarkBinding =
@@ -33,6 +36,21 @@ class BookmarkAdapter(
                 .thumbnail(0.5f)
                 .into(bookImage)
             contentTextView.text = item.content ?: context.getString(R.string.write_book_mark)
+
+            moreButton.setOnClickListener {
+                val popupMenu = PopupMenu(context, it)
+                MenuInflater(context).inflate(R.menu.bookmark_more_menu, popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener { menuItem ->
+                    return@setOnMenuItemClickListener when (menuItem.itemId) {
+                        R.id.delete -> {
+                            deleteListener?.invoke(item)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+                popupMenu.show()
+            }
         }
         holder.itemView.setOnClickListener {
             clickListener?.invoke(item)
@@ -52,6 +70,12 @@ class BookmarkAdapter(
         notifyItemRangeChanged(currentSize, this.list.size)
     }
 
+    fun remove(bookmarkId: Int) {
+        val deleteIndex = this.list.indexOfFirst { it.id == bookmarkId }
+        if (deleteIndex == -1) return
+        list.removeAt(deleteIndex)
+        notifyItemRemoved(deleteIndex)
+    }
+
     class ViewHolder(val binding: ItemBookmarkBinding) : RecyclerView.ViewHolder(binding.root)
 }
-

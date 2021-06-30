@@ -37,7 +37,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/more_button"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@id/book_image"
                 app:layout_constraintTop_toTopOf="parent"
@@ -55,7 +55,7 @@
                 android:textColor="@color/primaryTextColor"
                 android:textSize="18sp"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/more_button"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@id/book_image"
                 app:layout_constraintTop_toBottomOf="@+id/title_text_view"
@@ -73,7 +73,7 @@
                 android:textColor="@color/primaryTextColor"
                 android:textSize="18sp"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/more_button"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@id/book_image"
                 app:layout_constraintTop_toBottomOf="@+id/author_text_view"
@@ -93,12 +93,21 @@
                 android:textColor="@color/primaryTextColor"
                 android:textSize="18sp"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/more_button"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@id/book_image"
                 app:layout_constraintTop_toBottomOf="@+id/publish_text_view"
                 tools:text="홍길동" />
 
+            <ImageView
+                android:id="@+id/more_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_more"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

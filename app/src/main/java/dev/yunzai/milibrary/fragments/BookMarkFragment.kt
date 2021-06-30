@@ -6,6 +6,7 @@ import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.adapter.BookmarkAdapter
 import dev.yunzai.milibrary.base.fragment.ViewBindingFragment
 import dev.yunzai.milibrary.databinding.FragmentBookMarkBinding
+import dev.yunzai.milibrary.util.goToBookmarkDetailActivity
 import dev.yunzai.milibrary.viewmodels.BookmarkViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,6 +33,11 @@ class BookMarkFragment : ViewBindingFragment<FragmentBookMarkBinding>() {
 
     private fun initView() {
         bookmarkAdapter = BookmarkAdapter(requireContext()) {
+            if (it.id == null || it.bookId == null) return@BookmarkAdapter
+            requireContext().goToBookmarkDetailActivity(it.bookId!!, it.id!!)
+        }
+        bookmarkAdapter.deleteListener = {
+            bookmarkViewModel.deleteBookmark(it.id)
         }
         binding.bookmarkRecyclerView.adapter = bookmarkAdapter
     }
@@ -40,6 +46,11 @@ class BookMarkFragment : ViewBindingFragment<FragmentBookMarkBinding>() {
         bookmarkViewModel.bookmarkFetchEvent.observe(this) {
             if (it == null) return@observe
             bookmarkAdapter.add(arrayListOf(it))
+        }
+
+        bookmarkViewModel.bookmarkDeleteCompleteEvent.observe(this) {
+            if (it == null) return@observe
+            bookmarkAdapter.remove(it)
         }
     }
 

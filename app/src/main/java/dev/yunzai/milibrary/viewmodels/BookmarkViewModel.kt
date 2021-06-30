@@ -1,7 +1,9 @@
 package dev.yunzai.milibrary.viewmodels
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.base.viewmodel.ViewModelBase
 import dev.yunzai.milibrary.data.BookRepository
 import dev.yunzai.milibrary.data.BookmarkRepository
@@ -17,6 +19,9 @@ class BookmarkViewModel(
     private val bookRepository: BookRepository
 ) : ViewModelBase() {
     val bookmarkFetchEvent = SingleLiveEvent<Bookmark?>()
+    val bookmarkUpdateCompleteEvent = SingleLiveEvent<Boolean>()
+    val bookmarkDeleteCompleteEvent = SingleLiveEvent<Int>()
+    val errorMessageEvent = SingleLiveEvent<@StringRes Int>()
     val bookmark: LiveData<Bookmark?>
         get() = _bookMark
     private val _bookMark = MutableLiveData<Bookmark?>()
@@ -62,7 +67,6 @@ class BookmarkViewModel(
                     bookmarkFetchEvent.value = it
                 },
                 {
-
                 }
             )
     }
@@ -93,9 +97,28 @@ class BookmarkViewModel(
             .subscribe(
                 {
                     _bookMark.value = null
+                    bookmarkDeleteCompleteEvent.value = bookmarkId
                 },
                 {
                     _bookMark.value = null
+                }
+            )
+    }
+
+    fun updateBookmark(bookmarkId: Int, content: String) {
+        if (content.isNullOrEmpty()) {
+            errorMessageEvent.value = R.string.write_bookmark_content
+        }
+
+        bookmarkRepository.editMyBookMark(bookmarkId, Bookmark(content = content))
+            .handleHttpException()
+            .handleProgress(this)
+            .withThread()
+            .subscribe(
+                {
+                    bookmarkUpdateCompleteEvent.call()
+                },
+                {
                 }
             )
     }
