@@ -12,6 +12,7 @@ class BookListViewModel(
     private val bookRepository: BookRepository
 ) : ViewModelBase() {
     val bookListFetchEvent = SingleLiveEvent<ArrayList<Book>?>()
+    var searchList = arrayListOf<Book>()
     private var searchTarget: String = TITLE
     private var currentPage = 1
     private var query = ""
@@ -21,6 +22,7 @@ class BookListViewModel(
         this.currentPage = 1
         this.searchTarget = searchTarget
         this.query = query
+        searchList.clear()
 
         bookRepository.searchBook(BOOK_LIST_SIZE, this.currentPage, this.query, this.searchTarget)
             .handleProgress(this)
@@ -31,6 +33,8 @@ class BookListViewModel(
                 {
                     totalPage = it.totalPage ?: 1
                     bookListFetchEvent.value = it.books
+                    if (!it.books.isNullOrEmpty())
+                        searchList.addAll(it.books)
                 },
                 {}
             )
@@ -47,6 +51,8 @@ class BookListViewModel(
                 {
                     totalPage = it.totalPage ?: 1
                     bookListFetchEvent.value = it.books
+                    if (!it.books.isNullOrEmpty())
+                        searchList.addAll(it.books)
                 },
                 {}
             )

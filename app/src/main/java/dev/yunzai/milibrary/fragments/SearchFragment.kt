@@ -46,6 +46,11 @@ class SearchFragment : ViewBindingFragment<FragmentSearchBinding>() {
                 requireContext().goToBookDetailActivity(it.id)
         }
         binding.bookSearchRecyclerView.adapter = bookLongListAdapter
+
+        if (!bookListViewModel.searchList.isNullOrEmpty()) {
+            bookLongListAdapter.add(bookListViewModel.searchList)
+        }
+
         binding.searchEditText.filters = arrayOf(getEmojiFilter())
         binding.filterSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) = Unit
