@@ -44,6 +44,7 @@ class BookmarkViewModel(
     fun getMyAllBookmark() {
         bookmarkRepository.getMyAllBookMark()
             .toObservable()
+            .doOnNext { if (it.bookmarks.isNullOrEmpty()) bookmarkFetchEvent.value = null }
             .flatMapIterable { it.bookmarks }
             .flatMapSingle { bookmark ->
                 bookRepository.getBookDetail(bookmark.bookId!!)

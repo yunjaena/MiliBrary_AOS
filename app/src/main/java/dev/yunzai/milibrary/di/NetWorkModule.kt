@@ -31,7 +31,7 @@ val netWorkModule = module {
             PRODUCTION_SERVER_BASE_URL
     }
 
-    factory(named(NO_AUTH)) {
+    single(named(NO_AUTH)) {
         OkHttpClient.Builder().apply {
             connectTimeout(10, TimeUnit.SECONDS)
             readTimeout(30, TimeUnit.SECONDS)
@@ -40,13 +40,13 @@ val netWorkModule = module {
         }.build()
     }
 
-    factory(named(AUTH)) {
+    single(named(AUTH)) {
         OkHttpClient.Builder().apply {
             connectTimeout(10, TimeUnit.SECONDS)
             readTimeout(30, TimeUnit.SECONDS)
             writeTimeout(15, TimeUnit.SECONDS)
             addInterceptor(getHttpLoggingInterceptor())
-            authenticator(TokenAuthenticator(get()))
+            authenticator(TokenAuthenticator(get(named(NO_AUTH))))
             addInterceptor { chain ->
                 val accessToken = Hawk.get(ACCESS_TOKEN, "")
                 Logger.d("access token : $accessToken")

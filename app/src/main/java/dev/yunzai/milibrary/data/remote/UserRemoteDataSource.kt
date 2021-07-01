@@ -1,5 +1,6 @@
 package dev.yunzai.milibrary.data.remote
 
+import dev.yunzai.milibrary.api.AuthApi
 import dev.yunzai.milibrary.api.NoAuthApi
 import dev.yunzai.milibrary.data.UserDataSource
 import dev.yunzai.milibrary.data.model.JwtResponse
@@ -10,7 +11,8 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 class UserRemoteDataSource(
-    private val noAuthApi: NoAuthApi
+    private val noAuthApi: NoAuthApi,
+    private val authApi: AuthApi
 ) : UserDataSource {
     override fun refreshToken(): Completable {
         return Completable.never()
@@ -54,5 +56,9 @@ class UserRemoteDataSource(
 
     override fun resendEmail(id: String): Completable {
         return noAuthApi.resendEmail(User(id))
+    }
+
+    override fun logout(): Completable {
+        return authApi.signout()
     }
 }

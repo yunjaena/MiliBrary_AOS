@@ -6,6 +6,7 @@ import dev.yunzai.milibrary.viewmodels.BookmarkViewModel
 import dev.yunzai.milibrary.viewmodels.ForgetPasswordViewModel
 import dev.yunzai.milibrary.viewmodels.HomeViewModel
 import dev.yunzai.milibrary.viewmodels.LoginViewModel
+import dev.yunzai.milibrary.viewmodels.MyPageViewModel
 import dev.yunzai.milibrary.viewmodels.ResendEmailViewModel
 import dev.yunzai.milibrary.viewmodels.ReviewViewModel
 import dev.yunzai.milibrary.viewmodels.SignUpViewModel
@@ -24,4 +25,5 @@ val viewModelModule = module {
     viewModel { BookListViewModel(get()) }
     viewModel { HomeViewModel(get(), get()) }
     viewModel { BookmarkViewModel(get(), get()) }
+    viewModel { MyPageViewModel(get()) }
 }

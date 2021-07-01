@@ -15,8 +15,8 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    single { UserRemoteDataSource(get(named(NO_AUTH))) }
     single { UserLocalDataSource() }
+    single { UserRemoteDataSource(get(named(NO_AUTH)), get(named(AUTH))) }
     single { UserRepository(get<UserLocalDataSource>(), get<UserRemoteDataSource>()) }
     single { BookRemoteDataSource(get(named(AUTH))) }
     single { BookRepository(get<BookRemoteDataSource>()) }

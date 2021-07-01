@@ -62,4 +62,9 @@ class UserRepository(
     override fun resendEmail(id: String): Completable {
         return userRemoteDataSource.resendEmail(id)
     }
+
+    override fun logout(): Completable {
+        return userRemoteDataSource.logout()
+            .andThen(userLocalDataSource.logout())
+    }
 }

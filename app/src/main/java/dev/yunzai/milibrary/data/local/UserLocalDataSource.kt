@@ -65,4 +65,11 @@ class UserLocalDataSource : UserDataSource {
     override fun resendEmail(id: String): Completable {
         return Completable.never()
     }
+
+    override fun logout(): Completable {
+        return Completable.create {
+            Hawk.deleteAll()
+            it.onComplete()
+        }
+    }
 }

@@ -1,7 +1,11 @@
 package dev.yunzai.milibrary.util
 
+import com.orhanobut.hawk.Hawk
 import com.orhanobut.logger.Logger
-import dev.yunzai.milibrary.data.UserRepository
+import dev.yunzai.milibrary.api.NoAuthApi
+import dev.yunzai.milibrary.constant.ACCESS_TOKEN
+import dev.yunzai.milibrary.constant.REFRESH_TOKEN
+import dev.yunzai.milibrary.data.model.RefreshRequest
 import io.reactivex.rxjava3.subjects.PublishSubject
 import okhttp3.Authenticator
 import okhttp3.Request
@@ -9,7 +13,7 @@ import okhttp3.Response
 import okhttp3.Route
 
 class TokenAuthenticator(
-    private val userRepository: UserRepository
+    private val noAuthApi: NoAuthApi
 ) : Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? {
         try {
@@ -39,10 +43,17 @@ class TokenAuthenticator(
 
     private fun getRefreshedJwtTokenResult(): Result<String> {
         val publishSubject: PublishSubject<Result<String>> = PublishSubject.create()
-        userRepository.refreshToken()
-            .andThen(userRepository.getAccessToken())
+        val refreshToken = Hawk.get(REFRESH_TOKEN, "")
+        noAuthApi.refreshToken(RefreshRequest(refreshToken))
             .subscribe({
-                publishSubject.onNext(Result.success(it))
+                if (it.accessToken?.token != null) {
+                    Hawk.put(ACCESS_TOKEN, it.accessToken.token)
+                }
+
+                if (it.refreshToken?.token != null) {
+                    Hawk.put(REFRESH_TOKEN, it.refreshToken.token)
+                }
+                publishSubject.onNext(Result.success(it.accessToken?.token ?: ""))
                 publishSubject.onComplete()
             }) {
                 publishSubject.onNext(Result.failure(it))
@@ -51,7 +62,6 @@ class TokenAuthenticator(
         return publishSubject.blockingSingle()
     }
 
-
     private fun getRequest(response: Response, token: String): Request {
         return response.request()
             .newBuilder()
@@ -59,7 +69,6 @@ class TokenAuthenticator(
             .addHeader("Authorization", "Bearer $token")
             .build()
     }
-
 
     companion object {
         const val TAG = "TokenAuthenticator"

@@ -27,4 +27,6 @@ interface UserDataSource {
     fun findPassword(id: String): Completable
 
     fun resendEmail(id: String): Completable
+
+    fun logout(): Completable
 }

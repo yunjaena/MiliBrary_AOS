@@ -5,12 +5,14 @@ import android.content.Intent
 import dev.yunzai.milibrary.activities.BookDetailActivity
 import dev.yunzai.milibrary.activities.BookListActivity
 import dev.yunzai.milibrary.activities.BookmarkDetailActivity
+import dev.yunzai.milibrary.activities.LoginActivity
 import dev.yunzai.milibrary.activities.ReviewEditActivity
 import dev.yunzai.milibrary.activities.ReviewListActivity
 import dev.yunzai.milibrary.constant.EXTRA_BOOK_ID
 import dev.yunzai.milibrary.constant.EXTRA_BOOK_LIST_SORT_TYPE
 import dev.yunzai.milibrary.constant.EXTRA_BOOK_MARK_ID
 import dev.yunzai.milibrary.constant.EXTRA_EDIT_MODE
+
 
 fun Context.goToBookDetailActivity(bookId: Int) {
     Intent(this, BookDetailActivity::class.java).run {
@@ -42,9 +44,18 @@ fun Context.goToBookmarkDetailActivity(bookId: Int, bookmarkId: Int) {
     }
 }
 
-fun Context.goToBookListActivity(sortType: String){
+fun Context.goToBookListActivity(sortType: String) {
     Intent(this, BookListActivity::class.java).run {
         putExtra(EXTRA_BOOK_LIST_SORT_TYPE, sortType)
+        startActivity(this)
+    }
+}
+
+fun Context.goToLoginActivity(isRestart: Boolean = true) {
+    val intent = Intent(this, LoginActivity::class.java).run {
+        if (isRestart) {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        }
         startActivity(this)
     }
 }

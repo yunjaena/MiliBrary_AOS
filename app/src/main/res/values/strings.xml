@@ -66,4 +66,8 @@
     <string name="score">평점</string>
     <string name="review">리뷰</string>
     <string name="save_book_mark_alert">책 상세 페이지에서 북마크를 저장해보세요~!</string>
+    <string name="welcome_milibrary">밀리브러리에 오신걸 환영해요~!</string>
+    <string name="logout">로그아웃</string>
+    <string name="logout_success">정상적으로 로그아웃 되었습니다.</string>
+    <string name="logout_failed">로그아웃에 실패하였습니다.</string>
 </resources>
