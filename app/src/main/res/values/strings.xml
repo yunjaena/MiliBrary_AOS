@@ -64,4 +64,5 @@
     <string name="write_date">작성일자</string>
     <string name="sort_type">정렬기준</string>
     <string name="score">평점</string>
+    <string name="review">리뷰</string>
 </resources>

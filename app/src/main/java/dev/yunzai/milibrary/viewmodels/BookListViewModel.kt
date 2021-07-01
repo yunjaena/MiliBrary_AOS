@@ -18,6 +18,13 @@ class BookListViewModel(
     private var query = ""
     private var totalPage = 1
 
+    val sortBookListFetchEvent = SingleLiveEvent<ArrayList<Book>?>()
+    var bookList = arrayListOf<Book>()
+    private var sortCurrentPage = 1
+    private var sortTotalPage = 1
+    private var sortType = ""
+
+
     fun searchBook(searchTarget: String, query: String) {
         this.currentPage = 1
         this.searchTarget = searchTarget
@@ -58,8 +65,51 @@ class BookListViewModel(
             )
     }
 
+    fun getBookList(sortType: String) {
+        this.sortCurrentPage = 1
+        this.sortType = sortType
+        searchList.clear()
+
+        bookRepository.getBookList(BOOK_LIST_SIZE, this.sortCurrentPage, this.sortType)
+            .handleProgress(this)
+            .handleHttpException()
+            .withThread()
+            .withThread()
+            .subscribe(
+                {
+                    this.sortTotalPage = it.totalPage ?: 1
+                    sortBookListFetchEvent.value = it.books
+                    if (!it.books.isNullOrEmpty())
+                        bookList.addAll(it.books)
+                },
+                {}
+            )
+    }
+
+    fun getNextBookList() {
+        this.sortCurrentPage++
+        bookRepository.getBookList(BOOK_LIST_SIZE, this.sortCurrentPage, this.sortType)
+            .handleProgress(this)
+            .handleHttpException()
+            .withThread()
+            .withThread()
+            .subscribe(
+                {
+                    this.sortTotalPage = it.totalPage ?: 1
+                    sortBookListFetchEvent.value = it.books
+                    if (!it.books.isNullOrEmpty())
+                        bookList.addAll(it.books)
+                },
+                {}
+            )
+    }
+
     fun isEndOfList(): Boolean {
         return totalPage == currentPage
+    }
+
+    fun isEndOfSortList(): Boolean {
+        return sortTotalPage == sortCurrentPage
     }
 
     companion object {

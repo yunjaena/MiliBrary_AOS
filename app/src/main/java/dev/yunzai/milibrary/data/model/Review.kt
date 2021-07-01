@@ -7,7 +7,6 @@ data class Review(
     val id: Int? = null,
     val narasarangId: String? = null,
     val score: Double? = null,
-    val title: String? = null,
-    val thumbnail: String? = null,
-    val nickname: String? = null
+    val nickname: String? = null,
+    val book: Book? = null
 )

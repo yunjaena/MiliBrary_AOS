@@ -1,6 +1,7 @@
 package dev.yunzai.milibrary.viewmodels
 
 import dev.yunzai.milibrary.base.viewmodel.ViewModelBase
+import dev.yunzai.milibrary.constant.SORT_TYPE_BOOK_YEAR_DESC_QRT_DESC
 import dev.yunzai.milibrary.data.BookRepository
 import dev.yunzai.milibrary.data.ReviewRepository
 import dev.yunzai.milibrary.data.model.BookList
@@ -19,7 +20,7 @@ class HomeViewModel(
     val randomReview = SingleLiveEvent<Review>()
 
     fun getNewBookList() {
-        bookRepository.getBookList(NEW_BOOK_LIST_LIMIT, NEW_BOOK_LIST_SORT_TYPE, 1, NEW_BOOK_LIST_SORT_BY)
+        bookRepository.getBookList(NEW_BOOK_LIST_LIMIT, 1, NEW_BOOK_LIST_SORT_BY)
             .handleHttpException()
             .withThread()
             .subscribe({
@@ -46,10 +47,9 @@ class HomeViewModel(
             .flatMapIterable { it.reviews }
             .flatMapSingle { review ->
                 bookRepository.getBookDetail(review.bookId!!)
-                    .map {
+                    .map { book ->
                         Review(
-                            title = it.title,
-                            thumbnail = it.thumbnail,
+                            book = book,
                             bookId = review.bookId,
                             comment = review.comment,
                             createdAt = review.createdAt,
@@ -71,8 +71,7 @@ class HomeViewModel(
     companion object {
         const val RANDOM_LIST_SIZE = 10
         const val NEW_BOOK_LIST_LIMIT = 10
-        const val NEW_BOOK_LIST_SORT_TYPE = "asc"
-        const val NEW_BOOK_LIST_SORT_BY = "year"
+        const val NEW_BOOK_LIST_SORT_BY = SORT_TYPE_BOOK_YEAR_DESC_QRT_DESC
     }
 
 }

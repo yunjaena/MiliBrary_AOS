@@ -35,6 +35,9 @@
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activities.ReviewListActivity" />
         <activity android:name=".activities.BookmarkDetailActivity" />
+        <activity
+            android:name=".activities.BookListActivity"
+            android:theme="@style/Theme.MiliBrary" />
     </application>
 
 </manifest>

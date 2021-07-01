@@ -10,7 +10,9 @@ import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.data.model.Review
 import dev.yunzai.milibrary.databinding.ItemReviewBinding
 
-class ReviewListAdapter : RecyclerView.Adapter<ReviewListAdapter.ViewHolder>() {
+class ReviewListAdapter(
+    val clickListener: ((Review) -> Unit)? = null
+) : RecyclerView.Adapter<ReviewListAdapter.ViewHolder>() {
     private val list = arrayListOf<Review>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,9 +31,9 @@ class ReviewListAdapter : RecyclerView.Adapter<ReviewListAdapter.ViewHolder>() {
                 ratingBar.visibility = View.GONE
             }
 
-            if (item.title != null) {
+            if (item.book?.title != null) {
                 bookTitle.visibility = View.VISIBLE
-                bookTitle.text = item.title
+                bookTitle.text = item.book.title
             } else {
                 bookTitle.visibility = View.GONE
             }
@@ -44,9 +46,13 @@ class ReviewListAdapter : RecyclerView.Adapter<ReviewListAdapter.ViewHolder>() {
             }
 
             Glide.with(root)
-                .load(item.thumbnail)
+                .load(item.book?.thumbnail)
                 .thumbnail(0.5f)
                 .into(bookImage)
+        }
+
+        holder.itemView.setOnClickListener {
+            clickListener?.invoke(item)
         }
     }
 

@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.Window
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.constant.SORT_TYPE_DATE
@@ -38,6 +39,7 @@ class ReviewSortDialog(
 
     fun show() {
         dialog.show()
+        dialog.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
     }
 
     fun setSortType(type: String) {

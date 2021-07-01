@@ -6,8 +6,11 @@ import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.adapter.BookListAdapter
 import dev.yunzai.milibrary.adapter.ReviewListAdapter
 import dev.yunzai.milibrary.base.fragment.ViewBindingFragment
+import dev.yunzai.milibrary.constant.SORT_TYPE_BOOK_YEAR_DESC_QRT_DESC
 import dev.yunzai.milibrary.databinding.FragmentHomeBinding
+import dev.yunzai.milibrary.dialog.ReviewPreviewDialog
 import dev.yunzai.milibrary.util.goToBookDetailActivity
+import dev.yunzai.milibrary.util.goToBookListActivity
 import dev.yunzai.milibrary.viewmodels.HomeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,7 +41,14 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
             if (it.id != null)
                 requireContext().goToBookDetailActivity(it.id)
         }
-        randomReviewListAdapter = ReviewListAdapter()
+        randomReviewListAdapter = ReviewListAdapter {
+            ReviewPreviewDialog(requireContext()).apply {
+                bookClickListener = {
+                    requireContext().goToBookDetailActivity(it)
+                }
+                show(it)
+            }
+        }
         binding.randomBookRecyclerView.adapter = randomBookListAdapter
         binding.newBookRecyclerView.adapter = newBookListAdapter
         binding.randomReviewRecyclerView.adapter = randomReviewListAdapter
@@ -46,6 +56,7 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
             fetchData()
         }
         binding.loadMoreNewBookListButton.setOnClickListener {
+            requireContext().goToBookListActivity(SORT_TYPE_BOOK_YEAR_DESC_QRT_DESC)
         }
     }
 

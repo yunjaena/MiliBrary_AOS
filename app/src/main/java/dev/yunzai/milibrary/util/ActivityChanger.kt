@@ -3,10 +3,12 @@ package dev.yunzai.milibrary.util
 import android.content.Context
 import android.content.Intent
 import dev.yunzai.milibrary.activities.BookDetailActivity
+import dev.yunzai.milibrary.activities.BookListActivity
 import dev.yunzai.milibrary.activities.BookmarkDetailActivity
 import dev.yunzai.milibrary.activities.ReviewEditActivity
 import dev.yunzai.milibrary.activities.ReviewListActivity
 import dev.yunzai.milibrary.constant.EXTRA_BOOK_ID
+import dev.yunzai.milibrary.constant.EXTRA_BOOK_LIST_SORT_TYPE
 import dev.yunzai.milibrary.constant.EXTRA_BOOK_MARK_ID
 import dev.yunzai.milibrary.constant.EXTRA_EDIT_MODE
 
@@ -36,6 +38,13 @@ fun Context.goToBookmarkDetailActivity(bookId: Int, bookmarkId: Int) {
     Intent(this, BookmarkDetailActivity::class.java).run {
         putExtra(EXTRA_BOOK_ID, bookId)
         putExtra(EXTRA_BOOK_MARK_ID, bookmarkId)
+        startActivity(this)
+    }
+}
+
+fun Context.goToBookListActivity(sortType: String){
+    Intent(this, BookListActivity::class.java).run {
+        putExtra(EXTRA_BOOK_LIST_SORT_TYPE, sortType)
         startActivity(this)
     }
 }
