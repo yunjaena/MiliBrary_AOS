@@ -3,6 +3,7 @@ package dev.yunzai.milibrary.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dev.yunzai.milibrary.base.viewmodel.ViewModelBase
+import dev.yunzai.milibrary.constant.SORT_TYPE_DATE
 import dev.yunzai.milibrary.data.ReviewRepository
 import dev.yunzai.milibrary.data.model.Review
 import dev.yunzai.milibrary.util.SingleLiveEvent
@@ -21,6 +22,9 @@ class ReviewViewModel(
     val listClearEvent = SingleLiveEvent<Boolean>()
     val reviewListEvent = SingleLiveEvent<ArrayList<Review>>()
     var nextUrl: String? = null
+    val sortType: LiveData<String>
+        get() = _sortType
+    var _sortType = MutableLiveData(SORT_TYPE_DATE)
 
     fun getMyReview(bookId: Int) {
         reviewRepository.getMyReview(bookId)
@@ -64,12 +68,18 @@ class ReviewViewModel(
             ).addTo(compositeDisposable)
     }
 
+    fun setSortType(sortType: String, bookId: Int) {
+        if (sortType == _sortType.value) return
+        _sortType.value = sortType
+        getReviewList(bookId, true)
+    }
+
     fun getReviewList(bookId: Int, isRefresh: Boolean = false) {
         if (isRefresh)
             nextUrl = null
 
         if (nextUrl == null) {
-            reviewRepository.getSpecificBookReview(bookId, REVIEW_SIZE, ORDER, SORT_BY)
+            reviewRepository.getSpecificBookReview(bookId, REVIEW_SIZE, ORDER, sortType.value!!)
                 .handleHttpException()
                 .withThread()
                 .subscribe(
@@ -100,6 +110,5 @@ class ReviewViewModel(
     companion object {
         const val REVIEW_SIZE = 10
         const val ORDER = "asc"
-        const val SORT_BY = "date"
     }
 }

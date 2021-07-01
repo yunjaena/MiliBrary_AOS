@@ -109,6 +109,21 @@
             android:background="@color/darkGray"
             app:layout_constraintTop_toBottomOf="@id/isbn_date_text_view" />
 
+        <Button
+            android:id="@+id/sort_type_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_filter"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/border"
+            tools:text="@string/write_date" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/review_recycler_view"
@@ -117,7 +132,7 @@
             android:layout_margin="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/border"
+            app:layout_constraintTop_toBottomOf="@+id/sort_type_button"
             tools:listitem="@layout/item_long_review" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

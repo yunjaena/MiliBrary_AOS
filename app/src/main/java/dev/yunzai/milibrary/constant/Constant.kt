@@ -21,3 +21,6 @@ const val REMOTE_REPOSITORY = "REMOTE_REPOSITORY"
 const val EXTRA_BOOK_ID = "EXTRA_BOOK_ID"
 const val EXTRA_EDIT_MODE = "EXTRA_EDIT_MODE"
 const val EXTRA_BOOK_MARK_ID = "EXTRA_BOOK_MARK_ID"
+
+const val SORT_TYPE_DATE = "date"
+const val SORT_TYPE_SCORE = "score"

@@ -61,4 +61,7 @@
     <string name="write_bookmark_content">나만의 한 줄 평을 입력해보세요!</string>
     <string name="complete_update_bookmark_content">북마크 한 줄 평을 업데이트 하였습니다.</string>
     <string name="delete">삭제</string>
+    <string name="write_date">작성일자</string>
+    <string name="sort_type">정렬기준</string>
+    <string name="score">평점</string>
 </resources>

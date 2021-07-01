@@ -7,7 +7,10 @@ import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.adapter.ReviewLongListAdapter
 import dev.yunzai.milibrary.base.activity.ViewBindingActivity
 import dev.yunzai.milibrary.constant.EXTRA_BOOK_ID
+import dev.yunzai.milibrary.constant.SORT_TYPE_DATE
+import dev.yunzai.milibrary.constant.SORT_TYPE_SCORE
 import dev.yunzai.milibrary.databinding.ActivityReviewListBinding
+import dev.yunzai.milibrary.dialog.ReviewSortDialog
 import dev.yunzai.milibrary.viewmodels.BookDetailViewModel
 import dev.yunzai.milibrary.viewmodels.ReviewViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -48,10 +51,23 @@ class ReviewListActivity : ViewBindingActivity<ActivityReviewListBinding>() {
                 return reviewViewModel.nextUrl == null
             }
         }
+
+        setSortTypeButtonText()
+
         Paginate.with(binding.reviewRecyclerView, pagingCallBack)
             .setLoadingTriggerThreshold(5)
             .addLoadingListItem(false)
             .build()
+
+        binding.sortTypeButton.setOnClickListener {
+            ReviewSortDialog(this@ReviewListActivity).apply {
+                setOnSortTypeListener {
+                    reviewViewModel.setSortType(it, bookId)
+                }
+                setSortType(reviewViewModel.sortType.value!!)
+                show()
+            }
+        }
     }
 
     private fun initObserver() {
@@ -77,6 +93,18 @@ class ReviewListActivity : ViewBindingActivity<ActivityReviewListBinding>() {
                 binding.publishDateTextView.text = pubDate ?: ""
                 binding.isbnDateTextView.text = getString(R.string.isbn_title, isbn ?: "")
             }
+        }
+
+        reviewViewModel.sortType.observe(this) {
+            setSortTypeButtonText()
+        }
+    }
+
+    private fun setSortTypeButtonText() {
+        binding.sortTypeButton.text = when (reviewViewModel.sortType.value) {
+            SORT_TYPE_DATE -> getString(R.string.write_date)
+            SORT_TYPE_SCORE -> getString(R.string.score)
+            else -> getString(R.string.write_date)
         }
     }
 }
