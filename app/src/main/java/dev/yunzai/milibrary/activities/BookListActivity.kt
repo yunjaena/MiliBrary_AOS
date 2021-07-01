@@ -62,7 +62,6 @@ class BookListActivity : ViewBindingActivity<ActivityBookListBinding>() {
             .setLoadingTriggerThreshold(5)
             .addLoadingListItem(false)
             .build()
-
     }
 
     private fun initObserver() {

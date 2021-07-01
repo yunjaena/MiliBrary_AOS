@@ -7,6 +7,7 @@ import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.base.fragment.ViewBindingFragment
 import dev.yunzai.milibrary.databinding.FragmentMyPageBinding
 import dev.yunzai.milibrary.util.goToLoginActivity
+import dev.yunzai.milibrary.util.goToOssLibraryActivity
 import dev.yunzai.milibrary.util.setOnSingleClickListener
 import dev.yunzai.milibrary.viewmodels.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -27,7 +28,10 @@ class MyPageFragment : ViewBindingFragment<FragmentMyPageBinding>() {
     }
 
     private fun initView() {
-        binding.logoutTextView.setOnSingleClickListener {
+        binding.openSourceLayout.setOnSingleClickListener {
+            requireContext().goToOssLibraryActivity()
+        }
+        binding.logoutLayout.setOnSingleClickListener {
             myPageViewModel.logOut()
         }
     }

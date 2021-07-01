@@ -2,6 +2,7 @@ package dev.yunzai.milibrary.util
 
 import android.content.Context
 import android.content.Intent
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.yunzai.milibrary.activities.BookDetailActivity
 import dev.yunzai.milibrary.activities.BookListActivity
 import dev.yunzai.milibrary.activities.BookmarkDetailActivity
@@ -12,7 +13,6 @@ import dev.yunzai.milibrary.constant.EXTRA_BOOK_ID
 import dev.yunzai.milibrary.constant.EXTRA_BOOK_LIST_SORT_TYPE
 import dev.yunzai.milibrary.constant.EXTRA_BOOK_MARK_ID
 import dev.yunzai.milibrary.constant.EXTRA_EDIT_MODE
-
 
 fun Context.goToBookDetailActivity(bookId: Int) {
     Intent(this, BookDetailActivity::class.java).run {
@@ -56,6 +56,12 @@ fun Context.goToLoginActivity(isRestart: Boolean = true) {
         if (isRestart) {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
+        startActivity(this)
+    }
+}
+
+fun Context.goToOssLibraryActivity() {
+    Intent(this, OssLicensesMenuActivity::class.java).run {
         startActivity(this)
     }
 }

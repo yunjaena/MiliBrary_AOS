@@ -70,4 +70,6 @@
     <string name="logout">로그아웃</string>
     <string name="logout_success">정상적으로 로그아웃 되었습니다.</string>
     <string name="logout_failed">로그아웃에 실패하였습니다.</string>
+    <string name="my_review">내 리뷰</string>
+    <string name="open_source">오픈소스</string>
 </resources>
