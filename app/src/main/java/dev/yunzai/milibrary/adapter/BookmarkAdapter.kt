@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.data.model.Bookmark
 import dev.yunzai.milibrary.databinding.ItemBookmarkBinding
@@ -27,12 +28,12 @@ class BookmarkAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
         with(holder.binding) {
-            titleTextView.text = item.title ?: ""
-            titleTextView.text = item.title ?: ""
-            authorTextView.text = item.authors ?: ""
+            titleTextView.text = item.book?.title ?: ""
+            titleTextView.text = item.book?.title ?: ""
+            authorTextView.text = item.book?.authors ?: ""
             publishTextView.text = item.createdAt ?: ""
-            com.bumptech.glide.Glide.with(holder.itemView)
-                .load(item.thumbnail)
+            Glide.with(holder.itemView)
+                .load(item.book?.thumbnail)
                 .thumbnail(0.5f)
                 .into(bookImage)
             contentTextView.text = item.content ?: context.getString(R.string.write_book_mark)

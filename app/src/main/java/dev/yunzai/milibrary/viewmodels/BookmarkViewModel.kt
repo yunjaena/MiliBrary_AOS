@@ -43,29 +43,13 @@ class BookmarkViewModel(
 
     fun getMyAllBookmark() {
         bookmarkRepository.getMyAllBookMark()
-            .toObservable()
-            .doOnNext { if (it.bookmarks.isNullOrEmpty()) bookmarkFetchEvent.value = null }
-            .flatMapIterable { it.bookmarks }
-            .flatMapSingle { bookmark ->
-                bookRepository.getBookDetail(bookmark.bookId!!)
-                    .map { book ->
-                        Bookmark(
-                            bookId = bookmark.bookId,
-                            content = bookmark.content,
-                            createdAt = bookmark.createdAt,
-                            id = bookmark.id,
-                            narasarangId = bookmark.narasarangId,
-                            title = book.title,
-                            authors = book.authors,
-                            thumbnail = book.thumbnail
-                        )
-                    }
-            }
             .handleHttpException()
             .withThread()
             .subscribe(
                 {
-                    bookmarkFetchEvent.value = it
+                    it.bookmarks.forEach {
+                        bookmarkFetchEvent.value = it
+                    }
                 },
                 {
                     bookmarkFetchEvent.value = null

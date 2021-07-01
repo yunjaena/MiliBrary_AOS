@@ -1,7 +1,6 @@
 package dev.yunzai.milibrary
 
 import android.app.Application
-import android.content.Context
 import com.orhanobut.hawk.Hawk
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger

@@ -47,7 +47,6 @@ fun Completable.toSingleConvert(): Single<Boolean> {
         .onErrorReturnItem(false)
 }
 
-
 fun <T> Observable<T>.withThread(): Observable<T> {
     return this.subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
@@ -58,7 +57,6 @@ fun <T> Observable<T>.handleHttpException(): Observable<T> {
         handleHttpException(it)
     }
 }
-
 
 fun <T> Single<T>.handleProgress(viewModel: ViewModelBase): Single<T> {
     return this.doOnSubscribe { viewModel.isLoading.postValue(true) }
@@ -72,13 +70,11 @@ fun Completable.handleProgress(viewModel: ViewModelBase): Completable {
         .doOnDispose { viewModel.isLoading.postValue(false) }
 }
 
-
 // TODO : 공통 HttpException 처리 (403 => 잘못된 접근)
 private fun handleHttpException(throwable: Throwable) {
     if (throwable !is HttpException) return
     Logger.e("handle http exception : ${throwable.code()}")
     when (throwable.code()) {
-
     }
 }
 
