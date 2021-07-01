@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.res.ResourcesCompat
 import dev.yunzai.milibrary.R
 
 class BaseAppBar(
@@ -48,21 +50,23 @@ class BaseAppBar(
         titleTextView.text = title
     }
 
-    fun setLeftButtonDrawable(drawable: Drawable) {
+    fun setLeftButtonDrawable(@DrawableRes resId: Int) {
         checkCustomActionbarSet()
         val leftButton = customAppBarView.findViewById<ImageView>(R.id.left_button)
         leftButton.visibility = View.VISIBLE
-        leftButton.background = drawable
+        leftButton.setImageResource(resId)
+        leftButton.setColorFilter(ResourcesCompat.getColor(context.resources, R.color.primaryTextColor, null))
         leftButton.setOnClickListener {
             leftButtonClickListener?.invoke(leftButton)
         }
     }
 
-    fun setRightButtonDrawable(drawable: Drawable) {
+    fun setRightButtonDrawable(@DrawableRes resId: Int) {
         checkCustomActionbarSet()
         val rightButton = customAppBarView.findViewById<ImageView>(R.id.right_button)
         rightButton.visibility = View.VISIBLE
-        rightButton.background = drawable
+        rightButton.setImageResource(resId)
+        rightButton.setColorFilter(ResourcesCompat.getColor(context.resources, R.color.primaryTextColor, null))
         rightButton.setOnClickListener {
             rightButtonClickListener?.invoke(rightButton)
         }

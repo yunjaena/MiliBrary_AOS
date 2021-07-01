@@ -38,6 +38,9 @@
         <activity
             android:name=".activities.BookListActivity"
             android:theme="@style/Theme.MiliBrary" />
+        <activity
+            android:name=".activities.MyReviewListActivity"
+            android:theme="@style/Theme.MiliBrary" />
     </application>
 
 </manifest>

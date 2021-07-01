@@ -3,7 +3,6 @@ package dev.yunzai.milibrary.base.activity
 import android.app.AlertDialog
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.base.appbar.BaseAppBar
 import dev.yunzai.milibrary.base.hideProgressDialog
@@ -40,9 +39,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun setBackKey() {
-        val backButtonDrawable =
-            ContextCompat.getDrawable(this@BaseActivity, R.drawable.ic_arrow_back_black) ?: return
-        baseAppBar?.setLeftButtonDrawable(backButtonDrawable)
+        baseAppBar?.setLeftButtonDrawable(R.drawable.ic_arrow_back_black)
         appBarLeftButtonClicked {
             onBackPressed()
         }

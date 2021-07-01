@@ -10,7 +10,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/secondaryColor"
+        android:background="@color/secondaryLightColor"
         android:focusable="true"
         android:focusableInTouchMode="true">
 
@@ -65,7 +65,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="24dp"
                         android:text="@string/login"
-                        android:textColor="@color/primaryTextColor"
+                        android:textColor="@color/secondaryTextColor"
                         android:textSize="30sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/user_id"
@@ -171,7 +171,7 @@
                         android:layout_height="0dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="15dp"
-                        android:background="@color/secondaryDarkColor"
+                        android:background="@color/secondaryLightColor"
                         android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="@id/find_password"
                         app:layout_constraintEnd_toStartOf="@id/resend_email"

@@ -9,7 +9,9 @@ import dev.yunzai.milibrary.R
 import dev.yunzai.milibrary.data.model.Review
 import dev.yunzai.milibrary.databinding.ItemLongReviewBinding
 
-class ReviewLongListAdapter : RecyclerView.Adapter<ReviewLongListAdapter.ViewHolder>() {
+class ReviewLongListAdapter(
+    val itemClickListener: ((Review) -> Unit)? = null
+) : RecyclerView.Adapter<ReviewLongListAdapter.ViewHolder>() {
     private val list = arrayListOf<Review>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,6 +22,9 @@ class ReviewLongListAdapter : RecyclerView.Adapter<ReviewLongListAdapter.ViewHol
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
+        holder.itemView.setOnClickListener {
+            itemClickListener?.invoke(item)
+        }
         with(holder.binding) {
             if (item.nickname != null) {
                 nickname.visibility = View.VISIBLE

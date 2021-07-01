@@ -71,6 +71,7 @@ class ReviewViewModel(
     fun setSortType(sortType: String, bookId: Int) {
         if (sortType == _sortType.value) return
         _sortType.value = sortType
+        listClearEvent.call()
         getReviewList(bookId, true)
     }
 
@@ -107,8 +108,48 @@ class ReviewViewModel(
             ).addTo(compositeDisposable)
     }
 
+    fun setMyReviewSortType(sortType: String) {
+        if (sortType == _sortType.value) return
+        listClearEvent.call()
+        _sortType.value = sortType
+        getMyReviewList(true)
+    }
+
+    fun getMyReviewList(isRefresh: Boolean = false) {
+        if (isRefresh)
+            nextUrl = null
+
+        if (nextUrl == null) {
+            reviewRepository.getMyTotalReview(REVIEW_SIZE, ORDER, sortType.value!!)
+                .handleHttpException()
+                .withThread()
+                .subscribe(
+                    {
+                        listClearEvent.call()
+                        nextUrl = it.links?.next
+                        reviewListEvent.value = it.reviews
+                    },
+                    {
+                    }
+                ).addTo(compositeDisposable)
+            return
+        }
+
+        reviewRepository.getMyTotalReview(nextUrl!!)
+            .handleHttpException()
+            .withThread()
+            .subscribe(
+                {
+                    nextUrl = it.links?.next
+                    reviewListEvent.value = it.reviews
+                },
+                {
+                }
+            ).addTo(compositeDisposable)
+    }
+
     companion object {
         const val REVIEW_SIZE = 10
-        const val ORDER = "asc"
+        const val ORDER = "desc"
     }
 }

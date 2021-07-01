@@ -7,6 +7,7 @@ import dev.yunzai.milibrary.activities.BookDetailActivity
 import dev.yunzai.milibrary.activities.BookListActivity
 import dev.yunzai.milibrary.activities.BookmarkDetailActivity
 import dev.yunzai.milibrary.activities.LoginActivity
+import dev.yunzai.milibrary.activities.MyReviewListActivity
 import dev.yunzai.milibrary.activities.ReviewEditActivity
 import dev.yunzai.milibrary.activities.ReviewListActivity
 import dev.yunzai.milibrary.constant.EXTRA_BOOK_ID
@@ -62,6 +63,12 @@ fun Context.goToLoginActivity(isRestart: Boolean = true) {
 
 fun Context.goToOssLibraryActivity() {
     Intent(this, OssLicensesMenuActivity::class.java).run {
+        startActivity(this)
+    }
+}
+
+fun Context.goToMyReviewActivity() {
+    Intent(this, MyReviewListActivity::class.java).run {
         startActivity(this)
     }
 }
