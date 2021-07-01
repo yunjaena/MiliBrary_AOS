@@ -44,13 +44,19 @@ class BookMarkFragment : ViewBindingFragment<FragmentBookMarkBinding>() {
 
     private fun initObserver() {
         bookmarkViewModel.bookmarkFetchEvent.observe(this) {
-            if (it == null) return@observe
+            if (it == null) {
+                binding.emptyBookmarkGroup.visibility = View.VISIBLE
+                return@observe
+            }
+            binding.emptyBookmarkGroup.visibility = View.GONE
             bookmarkAdapter.add(arrayListOf(it))
         }
 
         bookmarkViewModel.bookmarkDeleteCompleteEvent.observe(this) {
             if (it == null) return@observe
             bookmarkAdapter.remove(it)
+            if (bookmarkAdapter.itemCount == 0)
+                binding.emptyBookmarkGroup.visibility = View.VISIBLE
         }
     }
 

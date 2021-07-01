@@ -65,4 +65,5 @@
     <string name="sort_type">정렬기준</string>
     <string name="score">평점</string>
     <string name="review">리뷰</string>
+    <string name="save_book_mark_alert">책 상세 페이지에서 북마크를 저장해보세요~!</string>
 </resources>

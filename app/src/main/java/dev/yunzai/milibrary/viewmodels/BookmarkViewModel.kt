@@ -67,6 +67,7 @@ class BookmarkViewModel(
                     bookmarkFetchEvent.value = it
                 },
                 {
+                    bookmarkFetchEvent.value = null
                 }
             )
     }
