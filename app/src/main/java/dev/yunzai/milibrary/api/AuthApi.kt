@@ -2,19 +2,19 @@ package dev.yunzai.milibrary.api
 
 import dev.yunzai.milibrary.data.model.Book
 import dev.yunzai.milibrary.data.model.BookList
-import dev.yunzai.milibrary.data.model.Bookmark
-import dev.yunzai.milibrary.data.model.BookmarkList
 import dev.yunzai.milibrary.data.model.Review
 import dev.yunzai.milibrary.data.model.ReviewList
+import dev.yunzai.milibrary.data.model.Bookmark
+import dev.yunzai.milibrary.data.model.BookmarkList
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
-import retrofit2.http.Body
-import retrofit2.http.DELETE
 import retrofit2.http.GET
-import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.DELETE
+import retrofit2.http.Body
+import retrofit2.http.PATCH
 import retrofit2.http.Url
 
 interface AuthApi {
