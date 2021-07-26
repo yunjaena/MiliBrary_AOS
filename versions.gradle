@@ -1,0 +1,99 @@
+ext {
+    /* Dependency - AndroidX Jetpack */
+    def androidx_appcompat_version = "1.2.0"
+    androidxAppCompat = "androidx.appcompat:appcompat:$androidx_appcompat_version"
+
+    def androidx_constraint_layout = "2.0.4"
+    constraintLayout = "androidx.constraintlayout:constraintlayout:$androidx_constraint_layout"
+
+    def androidx_cardview_version = "1.0.0"
+    androidxCardView = "androidx.cardview:cardview:$androidx_cardview_version"
+
+    def androidx_recyclerview_version = "1.1.0"
+    androidxRecyclerView = "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
+
+    def androidx_activity_version = "1.2.0"
+    androidxActivity = "androidx.activity:activity-ktx:$androidx_activity_version"
+
+    def androidx_fragment_version = "1.2.5"
+    androidxFragment = "androidx.fragment:fragment-ktx:$androidx_fragment_version"
+
+    /* Dependency - AndroidX Navigation */
+    def androidx_navigation_version = "2.3.5"
+    androidxNavigation = "androidx.navigation:navigation-fragment:$androidx_navigation_version"
+    androidxNavigationUi = "androidx.navigation:navigation-ui:$androidx_navigation_version"
+    androidxNavgationKtx = "androidx.navigation:navigation-ui-ktx:$androidx_navigation_version"
+    androidxNavgationFragment = "androidx.navigation:navigation-fragment-ktx:$androidx_navigation_version"
+    androidxNavigationPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$androidx_navigation_version"
+
+    def androidx_material_version = "1.2.1"
+    androidxMaterial = "com.google.android.material:material:$androidx_material_version"
+
+    /* Dependency - AndroidX Lifecycle */
+    def android_lifecycle_version = "2.2.0"
+    androidxLifecycleLivedata = "androidx.lifecycle:lifecycle-livedata-ktx:$android_lifecycle_version"
+    androidLifecycleViewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$android_lifecycle_version"
+
+    /* Dependency - Retrofit2 */
+    def retrofit_version = "2.9.0"
+    retrofit = "com.squareup.retrofit2:retrofit:$retrofit_version"
+    retrofitMoshiConvert = "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    retrofitGsonConvert = "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    retrofitRxJava = "com.squareup.retrofit2:adapter-rxjava3:$retrofit_version"
+    retrofitScalarsConverter = "com.squareup.retrofit2:converter-scalars:$retrofit_version"
+
+    /* Dependency - leakcanary */
+    def leakcanary_version = "1.6.3"
+    leakcanaryDebug = "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
+    leakcanaryRelease = "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
+    leakcanrySupportFragment = "com.squareup.leakcanary:leakcanary-support-fragment:$leakcanary_version"
+
+    /* Dependency - glide */
+    def glide_version = "4.11.0"
+    glide = "com.github.bumptech.glide:glide:$glide_version"
+    glideAnnotation = "com.github.bumptech.glide:compiler:$glide_version"
+
+    /* Dependency - okhttp */
+    def okhttp_version = "3.12.0"
+    okhttp = "com.squareup.okhttp3:okhttp:$okhttp_version"
+    okhttpLogging = "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+    def rxKotlin_version = "3.0.0"
+    rxkotlin = "io.reactivex.rxjava3:rxkotlin:$rxKotlin_version"
+    rxandroid = "io.reactivex.rxjava3:rxandroid:$rxKotlin_version"
+
+    /* Dependency - lottie */
+    def lottie_verison = "3.4.2"
+    lottie = "com.airbnb.android:lottie:$lottie_verison"
+
+    def pretty_logger_version = "2.2.0"
+    prettyLogger = "com.orhanobut:logger:$pretty_logger_version"
+
+    /* Dependency - koin */
+    def koin_version = "3.0.1-beta-2"
+
+    koinCore = "io.insert-koin:koin-core:$koin_version"
+    koinAndroid = "io.insert-koin:koin-android:$koin_version"
+    koinAndroidExtension = "io.insert-koin:koin-android-ext:$koin_version"
+    koinWorkManager = "io.insert-koin:koin-androidx-workmanager:$koin_version"
+    koinTest = "io.insert-koin:koin-test:$koin_version"
+
+    /* Dependency - hawk */
+    def hawk_version = "2.0.1"
+    hawk = "com.orhanobut:hawk:$hawk_version"
+
+    /* Dependency - SMS Verification */
+    def play_service_auth_version = "17.0.0"
+    playServiceAuth = "com.google.android.gms:play-services-auth:$play_service_auth_version"
+    def play_service_auth_api_phone_version = "17.4.0"
+    playServiceAuthApiPhone = "com.google.android.gms:play-services-auth-api-phone:$play_service_auth_api_phone_version"
+
+    /* Dependency - Paginate */
+    def paginate_version = "1.0.0"
+    paginate = "com.github.markomilos:paginate:$paginate_version"
+
+    /* Dependency - ossLicense */
+    def oss_license_version = "17.0.0"
+    ossLicense = "com.google.android.gms:play-services-oss-licenses:$oss_license_version"
+
+}

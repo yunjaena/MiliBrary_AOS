@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/book_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/isbn_date_text_view"
+                app:layout_constraintDimensionRatio="0.7:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/title_text_view" />
+
+            <TextView
+                android:id="@+id/title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@+id/book_mark_image_view"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/book_image"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="홍길동" />
+
+            <ImageView
+                android:id="@+id/book_mark_image_view"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:scaleType="fitXY"
+                android:visibility="gone"
+                android:src="@drawable/ic_bookmark_unselect"
+                app:layout_constraintBottom_toBottomOf="@id/title_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/title_text_view"
+                app:layout_constraintVertical_bias="0" />
+
+            <TextView
+                android:id="@+id/author_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="18sp"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@+id/book_mark_image_view"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/book_image"
+                app:layout_constraintTop_toBottomOf="@+id/title_text_view"
+                tools:text="홍길동" />
+
+            <TextView
+                android:id="@+id/category_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="18sp"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@+id/book_mark_image_view"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/book_image"
+                app:layout_constraintTop_toBottomOf="@+id/author_text_view"
+                tools:text="홍길동" />
+
+            <TextView
+                android:id="@+id/publish_date_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="18sp"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@+id/book_mark_image_view"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/book_image"
+                app:layout_constraintTop_toBottomOf="@+id/category_text_view"
+                tools:text="홍길동" />
+
+            <TextView
+                android:id="@+id/isbn_date_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="18sp"
+                android:visibility="gone"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@+id/book_mark_image_view"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/book_image"
+                app:layout_constraintTop_toBottomOf="@+id/publish_date_text_view"
+                tools:text="홍길동" />
+
+            <TextView
+                android:id="@+id/description_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/description"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/book_image"
+                app:layout_constraintTop_toBottomOf="@+id/book_image" />
+
+            <TextView
+                android:id="@+id/description_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/description_title"
+                tools:text="본문" />
+
+
+            <TextView
+                android:id="@+id/my_rating_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/my_rating"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@+id/book_image"
+                app:layout_constraintTop_toBottomOf="@+id/description_text_view" />
+
+            <RatingBar
+                android:id="@+id/my_rating_bar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:focusable="false"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:progressTint="@color/primaryColor"
+                app:layout_constraintStart_toStartOf="@+id/my_rating_title"
+                app:layout_constraintTop_toBottomOf="@+id/my_rating_title"
+                tools:rating="1" />
+
+            <TextView
+                android:id="@+id/my_review_created_date_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/my_rating_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@id/my_rating_bar"
+                app:layout_constraintTop_toTopOf="@id/my_rating_bar"
+                tools:text="2020.11.18" />
+
+            <TextView
+                android:id="@+id/my_review_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/my_rating_bar"
+                app:layout_constraintStart_toStartOf="@+id/my_rating_bar"
+                app:layout_constraintTop_toBottomOf="@+id/my_rating_bar"
+                tools:text="너무 좋아요" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/my_rating_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="my_rating_bar, my_review_text_view, my_review_created_date_text_view"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/my_review_edit_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColor="@color/primaryLightColor"
+                app:layout_constraintEnd_toEndOf="@+id/my_rating_bar"
+                app:layout_constraintStart_toStartOf="@+id/my_rating_bar"
+                app:layout_constraintTop_toBottomOf="@+id/my_review_text_view"
+                tools:text="리뷰 작성하기" />
+
+
+            <TextView
+                android:id="@+id/rating_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/rating_and_review"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@+id/book_image"
+                app:layout_constraintTop_toBottomOf="@+id/my_review_edit_text_view" />
+
+            <TextView
+                android:id="@+id/rating_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/rating_bar"
+                app:layout_constraintStart_toStartOf="@id/rating_title"
+                app:layout_constraintTop_toTopOf="@+id/rating_bar"
+                tools:text="4.4" />
+
+            <RatingBar
+                android:id="@+id/rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:focusable="false"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:progressTint="@color/primaryColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/rating_detail_arrow_image_view"
+                app:layout_constraintStart_toEndOf="@id/rating_text_view"
+                app:layout_constraintTop_toBottomOf="@id/rating_title"
+                tools:rating="1" />
+
+            <ImageView
+                android:id="@+id/rating_detail_arrow_image_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:rotation="180"
+                android:src="@drawable/ic_arrow_back_black"
+                app:layout_constraintBottom_toBottomOf="@+id/rating_text_view"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rating_text_view"
+                app:layout_goneMarginEnd="10dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

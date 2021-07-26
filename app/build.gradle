@@ -1,0 +1,122 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'org.jlleitschuh.gradle.ktlint'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
+    id 'com.google.android.gms.oss-licenses-plugin'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "dev.yunzai.milibrary"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 10000
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    dataBinding {
+        enabled = true
+    }
+    kotlinOptions {
+        freeCompilerArgs = ["-Xallow-result-return-type"]
+    }
+}
+
+dependencies {
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt "com.android.databinding:compiler:4.1.2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    /* Dependency - AndroidX Jetpack */
+    implementation project.androidxActivity
+    implementation project.androidxAppCompat
+    implementation project.androidxRecyclerView
+    implementation project.androidxCardView
+    implementation project.androidxNavigation
+    implementation project.androidxNavgationFragment
+    implementation project.androidxNavgationKtx
+    implementation project.androidxNavigationUi
+    implementation project.androidxMaterial
+    implementation project.androidxFragment
+    implementation project.constraintLayout
+
+    /* Dependency - AndroidX lifecycle */
+    implementation project.androidxLifecycleLivedata
+    implementation project.androidLifecycleViewmodel
+
+    /* Dependency - Retrofit2 */
+    implementation project.retrofit
+    implementation project.retrofitGsonConvert
+    implementation project.retrofitRxJava
+    implementation project.retrofitMoshiConvert
+    implementation project.retrofitScalarsConverter
+
+    /* Dependency - leakcanary */
+    debugImplementation project.leakcanaryDebug
+    releaseImplementation project.leakcanaryRelease
+    debugImplementation project.leakcanrySupportFragment
+
+    /* Dependency - glide */
+    implementation project.glide
+    annotationProcessor project.glideAnnotation
+
+    /* Dependency - okhttp */
+    implementation project.okhttp
+    implementation project.okhttpLogging
+
+    /* Dependency - rxkotlin */
+    implementation(project.rxkotlin)
+    implementation project.rxandroid
+
+    /* Dependency - lottie */
+    implementation project.lottie
+
+    /* Dependency - Pretty Logger */
+    implementation project.prettyLogger
+
+    /* Dependency - Koin */
+    implementation project.koinCore
+    implementation project.koinAndroid
+    implementation project.koinAndroidExtension
+    implementation project.koinWorkManager
+    testImplementation project.koinTest
+
+    /* Dependency - Hawk */
+    implementation project.hawk
+
+    /* Dependency - SMS Verification */
+    implementation project.playServiceAuth
+    implementation project.playServiceAuthApiPhone
+
+    /* Dependency - Paginate */
+    implementation project.paginate
+
+    /* Dependency - ossLicense */
+    implementation project.ossLicense
+}
